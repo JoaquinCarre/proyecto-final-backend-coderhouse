@@ -89,12 +89,9 @@ async function addProductToCart(id) {
         const cartLog = await fetch("http://localhost:8080/carrito/carritos");
         const cart = await cartLog.json();
         let productIndex = cart[0].products.findIndex(prod => prod._id === productToAdd._id);
-        console.log('productIndex: ', productIndex);
         if (productIndex !== -1) {
-            console.log('1', productToAdd);
             cart[0].products[productIndex].quantity += 1;
             productToAdd = cart[0].products[productIndex];
-            console.log('2', productToAdd);
             const dataJSON = JSON.stringify(productToAdd);
             await fetch(`http://localhost:8080/carrito/${cart[0]._id}`, {
                 headers: {

@@ -127,10 +127,21 @@ cartButton.addEventListener('click', async () => {
 });
 
 async function buyCart(cart_id, user_id) {
-    let responseFetch = await fetch(`http://localhost:8080/carrito/${cart_id}/${user_id}`, {
-        method: 'POST'
+    const cartLog = await fetch("http://localhost:8080/carrito/carritos");
+    const cart = await cartLog.json();
+    let message = '';
+    await cart[0].products.forEach((prod) => {
+        message += `<p>Producto: ${prod.title} | Cantidad: ${prod.quantity}</p>`;
     });
-    console.log('Realizando la compra');
+    console.log('mensaje a enviar de productos: ', message);
+    let responseFetch = await fetch(`http://localhost:8080/carrito/${cart_id}/${user_id}`, {
+        headers: {
+            'Content-Type': 'text/plain',
+        },
+        method: 'POST',
+        body: message
+    });
+    messageCart.innerText = 'Procesando compra...'
     if (responseFetch.status === 200) {
         console.log('Borrando Carrito por compra exitosa');
         messageCart.innerText = 'Gracias por tu compra! Sigue viendo el catálogo de nuestros productos';

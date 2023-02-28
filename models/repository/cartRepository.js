@@ -10,7 +10,6 @@ export default class CartRepository {
         const data = await this.dao.getAll();
         if (data) {
             const dataDTO = data.map((cart) => new CartDTO(cart));
-            console.log('dataDTO Cart: ', dataDTO);
             return dataDTO;
         } else {
             return null;
@@ -19,7 +18,6 @@ export default class CartRepository {
 
     async createNew(data) {
         const response = await this.dao.create(data);
-        console.log('respuesta creado repository: ', response);
         return new CartDTO(response);
     }
 

@@ -56,7 +56,6 @@ export async function getCart(req, res, next) {
 export async function addProductToCart(req, res, next) {
   try {
     let product = req.body;
-    console.log(product)
     let cartId = req.params.id;
     const addProduct = await cartServices.uploadCartById(cartId, product);
     logger.info('Se añadió un nuevo producto al carrito');
@@ -105,9 +104,13 @@ export async function deleteProductFromCart(req, res, next) {
 export async function buyCart(req, res, next) {
   try {
     const { id, user_id } = req.params;
+    const productsCart = req.body;
     const user = await getUser(user_id)
-    const message = `El usuario ${user.email} (id: ${user_id}) ha realizado la compra de su carrito (id: ${id})`;
-    await sendMail(`Usuario ${user.email} realizó una compra`, message, user.email);
+    const timestamp = new Date();
+    const message = `Gracias por su compra ${user.email}! Su orden de compra es: '${id}' generada en la fecha y hora ${timestamp.toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' })} ${timestamp.getHours()}:${timestamp.getMinutes()}:${timestamp.getSeconds()}. Su pedido es:
+    <p>${productsCart}</p>
+    <p>estado: generada</p>`;
+    await sendMail(`Usuario ${user.email} realizó una compra`, message, process.env.MAIL_NODEMAILER);
     logger.info('La compra ya ha sido comunicada al proveedor');
     res.status(200).json(message);
   } catch (err) {

@@ -55,7 +55,7 @@ export async function signUp(req, res) {
         <li>Teléfono: ${user.phone}</li>
         <li>Fecha y Hora de registro: ${timestamp.toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' })} ${timestamp.getHours()}:${timestamp.getMinutes()}:${timestamp.getSeconds()}</li>
         </ul>`;
-    await sendMail(`Usuario ${user.email} se registró.`, bodyHTML, user.email);
+    await sendMail(`Usuario ${user.email} se registró.`, bodyHTML, process.env.MAIL_NODEMAILER);
     res.json({ message: `Usuario ${user.email} se registró.`, user });
   } catch (err) {
     logger.error(`No es posible registrarse:
