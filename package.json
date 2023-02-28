@@ -1,0 +1,49 @@
+{
+  "name": "proyecto-final-backend-coderhouse",
+  "version": "0.0.1",
+  "description": "Proyecto Final del curso de BackEnd de CoderHouse",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node .",
+    "dev": "nodemon -r dotenv/config app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoaquinCarre/proyecto-final-backend-coderhouse.git"
+  },
+  "keywords": [
+    "proyecto",
+    "trabajo",
+    "final",
+    "coderhouse",
+    "backend"
+  ],
+  "author": "Joaquín Carré",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoaquinCarre/proyecto-final-backend-coderhouse/issues"
+  },
+  "homepage": "https://github.com/JoaquinCarre/proyecto-final-backend-coderhouse#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cluster": "^0.7.7",
+    "connect-mongo": "^4.6.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-handlebars": "^6.0.7",
+    "jsonwebtoken": "^9.0.0",
+    "minimist": "^1.2.8",
+    "mongoose": "^6.10.0",
+    "nodemailer": "^6.9.1",
+    "nodemon": "^2.0.20",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
+    "socket.io": "^4.6.1",
+    "twilio": "^4.8.0",
+    "uuid": "^9.0.0",
+    "winston": "^3.8.2"
+  }
+}

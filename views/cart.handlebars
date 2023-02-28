@@ -1,0 +1,35 @@
+<section class="container">
+    <div id="cart-div">
+        <h1 class="text-white">Carrito de Compras</h1>
+        <div id="table-container" class="bg-warning">
+            <table id="table-cart-products" class="m-auto table table-borderless" border="2" align="center">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Precio [$]</th>
+                    <th>Imagen</th>
+                    <th>Cantidad</th>
+                    <th style='color:gray'>Eliminar Producto</th>
+                </tr>
+                {{#each productos}}
+                <tr>
+                    <td>{{this.title}}</td>
+                    <td>{{this.price}}</td>
+                    <td>
+                        <img src={{this.thumbnail}} alt="imagen {{this.title}}" width="100px" />
+                    </td>
+                    <td>{{this.quantity}}</td>
+                    <td>
+                        <button id='deleteProduct{{this._id}}' onclick="deleteProductCart('{{this._id}}')"
+                            class='btn btn-outline-danger'>X</button>
+                    </td>
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+        <div id="buttons-cart">
+        </div>
+        <div id="message-cart"></div>
+    </div>
+</section>
+<script src="./js/cart.js"></script>
+<script src="./js/navbar.js"></script>

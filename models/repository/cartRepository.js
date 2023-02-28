@@ -1,0 +1,50 @@
+import { cartInstance } from "../dao/indexDAO.js";
+import CartDTO from "../dto/cartDTO.js";
+
+export default class CartRepository {
+    constructor() {
+        this.dao = cartInstance;
+    }
+
+    async getAllShopCarts() {
+        const data = await this.dao.getAll();
+        if (data) {
+            const dataDTO = data.map((cart) => new CartDTO(cart));
+            console.log('dataDTO Cart: ', dataDTO);
+            return dataDTO;
+        } else {
+            return null;
+        }
+    }
+
+    async createNew(data) {
+        const response = await this.dao.create(data);
+        console.log('respuesta creado repository: ', response);
+        return new CartDTO(response);
+    }
+
+    async getACartByid(id) {
+        const data = await this.dao.getOneById(id);
+        if (data) {
+            return new CartDTO(data);
+        } else {
+            return null;
+        }
+    }
+
+    async updateCart(idCart, prod) {
+        return await this.dao.updateCartById(idCart, prod);
+    }
+
+    async updateQuantityProduct(id, prod) {
+        return await this.dao.updateQuantityOfAProduct(id, prod);
+    }
+
+    async deleteACart(id) {
+        return await this.dao.deleteById(id);
+    }
+
+    async deleteProduct(id, product_id) {
+        return await this.dao.deleteProductByIdFromCart(id, product_id);
+    }
+}

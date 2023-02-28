@@ -1,0 +1,28 @@
+<section class="container">
+    <div class="products-table">
+        <div>
+            <h2>Productos</h2>
+            <table class="table bg-white text-center" id="tableProducts">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Precio [$]</th>
+                    <th>Imagen</th>
+                    <th>Agregar al carrito</th>
+                </tr>
+                {{#each productos}}
+                <tr>
+                    <td>{{this.title}}</td>
+                    <td>{{this.price}}</td>
+                    <td><img src="{{this.thumbnail}}" alt="imagen{{this.title}}" width="100px"></td>
+                    <td>
+                        <button id='addProduct{{this._id}}' onclick="addProductToCart('{{this._id}}')"
+                            class='btn btn-outline-success'>+</button>
+                    </td>
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+    </div>
+</section>
+<script src="./js/products.js"></script>
+<script src="./js/navbar.js"></script>
