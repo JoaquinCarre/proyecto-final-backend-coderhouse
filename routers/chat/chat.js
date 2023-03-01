@@ -5,6 +5,6 @@ import { verifyToken } from '../../config/jwt.js';
 const router = Router();
 
 router.get('/', verifyToken, indexChat)
-router.get('/:email', getChatsByEmail)
+router.get('/:email', verifyToken, getChatsByEmail)
 
 export default router;
