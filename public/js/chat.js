@@ -40,9 +40,55 @@ signOutButton.addEventListener('click', async () => {
 //Boton para linkear a la vista de productos
 linkProducts.addEventListener('click', async () => {
     window.location.replace("/productos");
-})
+});
 
 //Boton para linkear a la vista de chat
-linkProducts.addEventListener('click', async () => {
+linkChat.addEventListener('click', async () => {
     window.location.replace("/chat");
-})
+});
+
+//CENTRO DE MENSAJES - CHAT
+const message = document.getElementById("messages");
+const formChat = document.getElementById("form");
+const inputMessage = document.getElementById("msg_input");
+
+function showMessage(data) {
+  message.innerHTML = '';
+  data.messages.forEach(msg => {
+    const item = document.createElement("li");
+    item.className = "list-group-item text-start";
+    item.innerHTML =
+      `<strong style="color: blue">${msg.email}</strong> <font color="brown">${msg.timestamp}</font> : <i style="color: green">${msg.content}</i>`;
+    message.appendChild(item);
+  })
+}
+
+formChat.addEventListener("submit", async function (e) {
+  e.preventDefault()
+  const userLog = await fetch("http://localhost:8080/users/me");
+  const user = await userLog.json();
+  console.log('mail usuario: ', user)
+  const data = {
+    author: {
+      email: user.email,
+      name: user.fullname,
+    },
+    content: inputMessage.value,
+    timestamp: new Date().toLocaleString()
+  };
+  socket.emit("chat message", data);
+  inputMessage.value = "";
+  inputMessage.focus();
+});
+
+socket.on("connect", () => {
+  console.log("Conectados al servidor");
+});
+
+socket.on("history-messages", (data) => {
+  showMessage(data);
+});
+
+socket.on("notification", (data) => {
+  showMessage(data);
+});

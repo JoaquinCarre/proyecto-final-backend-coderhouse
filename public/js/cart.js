@@ -133,15 +133,17 @@ async function buyCart(cart_id, user_id) {
     await cart[0].products.forEach((prod) => {
         message += `<p>Producto: ${prod.title} | Cantidad: ${prod.quantity}</p>`;
     });
-    console.log('mensaje a enviar de productos: ', message);
+    const messageObject = { message };
+    const dataJSON = JSON.stringify(messageObject);
+    messageCart.innerText = 'Procesando compra...';
     let responseFetch = await fetch(`http://localhost:8080/carrito/${cart_id}/${user_id}`, {
         headers: {
-            'Content-Type': 'text/plain',
+            'Content-Type': 'application/json',
+            'Content-Length': dataJSON.length
         },
         method: 'POST',
-        body: message
+        body: dataJSON
     });
-    messageCart.innerText = 'Procesando compra...'
     if (responseFetch.status === 200) {
         console.log('Borrando Carrito por compra exitosa');
         messageCart.innerText = 'Gracias por tu compra! Sigue viendo el catálogo de nuestros productos';

@@ -21,8 +21,8 @@ export async function signIn(req, res, next) {
     const { user } = req
     req.login(user, { session: false }, async (err) => {
       if (err) return next(err)
-      const token = jwt.sign({ email: user.email, id: user._id }, 'my-secret-key', { expiresIn: '3m' });
-      return res.cookie('token', token, { maxAge: 180000, httpOnly: true/* , secure: true  */ }).json({ message: `Bienvenido ${user.email}.`, token })
+      const token = jwt.sign({ email: user.email, id: user._id }, 'my-secret-key', { expiresIn: '10m' });
+      return res.cookie('token', token, { maxAge: 600000, httpOnly: true/* , secure: true  */ }).json({ message: `Bienvenido ${user.email}.`, token })
     })
   }
   catch (err) {

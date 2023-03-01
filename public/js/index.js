@@ -30,7 +30,6 @@ async function loadWebPage() {
     loading.classList.remove('d-none');
     if (userLog.status === 200) {
         setTimeout(async () => {
-            const user = await userLog.json();
             loading.classList.add('d-none');
             signinDiv.classList.add('d-none');
             signupDiv.classList.add('d-none');

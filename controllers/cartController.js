@@ -105,10 +105,11 @@ export async function buyCart(req, res, next) {
   try {
     const { id, user_id } = req.params;
     const productsCart = req.body;
+    console.log('productos recibidos: ', productsCart);
     const user = await getUser(user_id)
     const timestamp = new Date();
     const message = `Gracias por su compra ${user.email}! Su orden de compra es: '${id}' generada en la fecha y hora ${timestamp.toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' })} ${timestamp.getHours()}:${timestamp.getMinutes()}:${timestamp.getSeconds()}. Su pedido es:
-    <p>${productsCart}</p>
+    <p>${productsCart.message}</p>
     <p>estado: generada</p>`;
     await sendMail(`Usuario ${user.email} realizó una compra`, message, process.env.MAIL_NODEMAILER);
     logger.info('La compra ya ha sido comunicada al proveedor');

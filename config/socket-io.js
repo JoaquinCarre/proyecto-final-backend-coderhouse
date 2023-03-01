@@ -1,19 +1,21 @@
 import { io } from "../app.js";
-/* import productServices from "../services/productServices.js"; */
+import messageAPI from '../controllers/messagesController.js';
+/* import normalizr from "normalizr";
+import { postSchema } from "../models/schema/message.js"; */
 import { logger } from "../logs/logger.js";
 
 function setEvents() {
     io.on("connection", async (socket) => {
         logger.info(`usuario id "${socket.id}" conectado`);
 
-        /* //AGREGADO DE PRODUCTOS
-        const dataProducts = await productServices.getAll();
-        socket.emit("history-products", dataProducts);
-        socket.on("nuevoProducto", async (data) => {
-            productServices.addProduct(data);
-            logger.info("Se carga un nuevo producto");
-            io.sockets.emit("productosActualizados", data);
-        }) */
+        //CENTRO DE MENSAJES - CHAT
+        const messages = await messageAPI.readAllMessages();
+        socket.emit("history-messages", { messages });
+        socket.on("chat message", async (data) => {
+            await messageAPI.sendNewMessage(data);
+            const messages2 = await messageAPI.readAllMessages();
+            io.sockets.emit("notification", { messages2 });
+        });
 
         socket.on("disconnect", () => {
             logger.info("usuario desconectado");

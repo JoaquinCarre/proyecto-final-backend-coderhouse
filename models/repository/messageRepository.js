@@ -9,7 +9,7 @@ export default class MessageRepository {
   async readFile() {
     const data = await this.dao.readJSONFile();
     const dataDTO = data[0].messages.map((m) => {
-      return new MessageDTO(m.authors.email, m.comments.content);
+      return new MessageDTO(m.authors.email, m.comments.content, m.comments.timestamp);
     });
     return dataDTO;
   }
