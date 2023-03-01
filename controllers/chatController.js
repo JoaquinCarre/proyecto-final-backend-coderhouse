@@ -14,7 +14,6 @@ export async function getChatsByEmail(req, res, next) {
     try {
         const { email } = req.params;
         const messages = await messageAPI.readAllMessages();
-        console.log('mensajes a filtrar: ', messages);
         const filteredMessages = messages.filter(msg => msg.email === email);
         res.json({ filteredMessages });
     } catch (err) {

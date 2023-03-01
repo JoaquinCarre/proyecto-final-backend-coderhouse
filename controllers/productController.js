@@ -22,6 +22,26 @@ export async function getAllProducts(_, res, next) {
   }
 }
 
+export async function getByCategory(req, res, next) {
+  try {
+    const { category } = req.params;
+    const products = await productServices.getAll();
+    const filteredProducts = products.filter(prod => prod.category === category);
+    res.json({ filteredProducts });
+  } catch (err) {
+    logger.error(err.message);
+    next(err);
+  }
+}
+
+export async function getImageProduct(req, res, next) {
+  const { params: { id } } = req;
+  const product = await productServices.getProductById(id);
+  const ruta = product.thumbnail;
+  const nombreArchivo = ruta.replace("./img/", "");
+  res.send(`<img src="../../img/${nombreArchivo}" alt="imagen${product.title}">`)
+}
+
 export async function addNewProduct(req, res, next) {
   try {
     const data = req.body;
@@ -35,7 +55,7 @@ export async function addNewProduct(req, res, next) {
 
 export async function getProduct(req, res, next) {
   try {
-    const { params: { id } } = req
+    const { params: { id } } = req;
     const product = await productServices.getProductById(id);
     if (!product) {
       return res.status(404).end()

@@ -1,4 +1,7 @@
 <section class="container">
+    <div class="row bg-danger">
+        <div class="text-white fw-bold col-6 justify-content-end">Categorías: </div><a class="text-white col-2 text-decoration-none" href="/productos/category/familiar">Familiar</a><a class="text-white col-2 text-decoration-none" href="/productos/category/estrategia">Estrategia</a><a class="text-white col-2 text-decoration-none" href="/productos/category/roll&write">Roll & Write</a>
+    </div>
     <div class="products-table">
         <div>
             <h2>Productos</h2>
@@ -13,7 +16,7 @@
                 <tr>
                     <td>{{this.title}}</td>
                     <td>{{this.price}}</td>
-                    <td><img src="{{this.thumbnail}}" alt="imagen{{this.title}}" width="100px"></td>
+                    <td><a href="/productos/images/{{this._id}}"><img src="{{this.thumbnail}}" alt="imagen{{this.title}}" width="100px"></a></td>
                     <td>
                         <button id='addProduct{{this._id}}' onclick="addProductToCart('{{this._id}}')"
                             class='btn btn-outline-success'>+</button>

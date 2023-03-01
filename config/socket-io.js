@@ -1,7 +1,5 @@
 import { io } from "../app.js";
 import messageAPI from '../controllers/messagesController.js';
-/* import normalizr from "normalizr";
-import { postSchema } from "../models/schema/message.js"; */
 import { logger } from "../logs/logger.js";
 
 function setEvents() {

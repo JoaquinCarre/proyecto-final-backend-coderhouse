@@ -145,6 +145,19 @@ async function buyCart(cart_id, user_id) {
         body: dataJSON
     });
     if (responseFetch.status === 200) {
+        const buyedOrder = {
+            timestamp: new Date(),
+            products: cart[0].products
+        }
+        const orderJSON = JSON.stringify(buyedOrder);
+        await fetch(`http://localhost:8080/carrito/order/${cart_id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Content-Length': dataJSON.length
+            },
+            method: 'POST',
+            body: orderJSON
+        });
         console.log('Borrando Carrito por compra exitosa');
         messageCart.innerText = 'Gracias por tu compra! Sigue viendo el catálogo de nuestros productos';
         setTimeout(async () => {

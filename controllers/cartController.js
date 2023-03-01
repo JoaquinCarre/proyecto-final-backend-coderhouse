@@ -1,6 +1,7 @@
 import { logger } from '../logs/logger.js';
 import { sendMail } from '../utils/emailUtils.js'
 import cartServices from '../services/cartServices.js';
+import orderServices from '../services/orderServices.js';
 import { getUser } from '../services/userServices.js';
 
 export async function indexCart(_, res, next) {
@@ -106,7 +107,8 @@ export async function buyCart(req, res, next) {
     const { id, user_id } = req.params;
     const productsCart = req.body;
     console.log('productos recibidos: ', productsCart);
-    const user = await getUser(user_id)
+    const user = await getUser(user_id);
+    console.log('usuario error: ', user);
     const timestamp = new Date();
     const message = `Gracias por su compra ${user.email}! Su orden de compra es: '${id}' generada en la fecha y hora ${timestamp.toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' })} ${timestamp.getHours()}:${timestamp.getMinutes()}:${timestamp.getSeconds()}. Su pedido es:
     <p>${productsCart.message}</p>
@@ -114,6 +116,20 @@ export async function buyCart(req, res, next) {
     await sendMail(`Usuario ${user.email} realizó una compra`, message, process.env.MAIL_NODEMAILER);
     logger.info('La compra ya ha sido comunicada al proveedor');
     res.status(200).json(message);
+  } catch (err) {
+    logger.error(`${err.message}`);
+    next(err);
+  }
+}
+
+export async function newOrder(req, res, next) {
+  try {
+    const { id } = req.params;
+    const orderBody = req.body;
+    console.log('ordenBody: ', orderBody);
+    const newOrder = {...orderBody, id}
+    const order = await orderServices.addNewOrder(newOrder);
+    res.status(200).json(`Orden de compra ${id} almacenada!`)
   } catch (err) {
     logger.error(`${err.message}`);
     next(err);
