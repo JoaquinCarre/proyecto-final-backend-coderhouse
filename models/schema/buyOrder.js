@@ -5,6 +5,8 @@ const order = new Schema({
     id: { type: String },
     products: [new Schema({
         title: { type: String, required: true },
+        price: { type: Number },
+        thumbnail: { type: String },
         quantity: { type: Number }
     })
     ]

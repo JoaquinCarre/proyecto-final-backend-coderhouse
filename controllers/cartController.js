@@ -106,7 +106,6 @@ export async function buyCart(req, res, next) {
   try {
     const { id, user_id } = req.params;
     const productsCart = req.body;
-    console.log('productos recibidos: ', productsCart);
     const user = await getUser(user_id);
     console.log('usuario error: ', user);
     const timestamp = new Date();

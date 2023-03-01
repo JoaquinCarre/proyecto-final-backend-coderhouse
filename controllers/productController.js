@@ -4,7 +4,6 @@ import productServices from '../services/productServices.js';
 export async function indexProducts(_, res, next) {
   try {
     const productos = await productServices.getAll();
-    console.log('productos de productos: ', productos);
     res.status(200).render('products', { productos });
   } catch (err) {
     logger.error(err.message);

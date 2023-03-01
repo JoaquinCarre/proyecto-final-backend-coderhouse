@@ -64,7 +64,6 @@ async function addProductToCart(id) {
     let productToAdd = await productToAddLog.json();
     if (!cart.length) {
         productToAdd = { ...productToAdd, quantity: 1 };
-        console.log('se agrega el producto: ', productToAdd);
         let responseFetch = await fetch("http://localhost:8080/carrito", {
             headers: {
                 'Content-Type': 'application/json'

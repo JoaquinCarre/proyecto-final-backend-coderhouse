@@ -47,7 +47,6 @@ export async function signUp(req, res) {
   try {
     const { user } = req;
     const timestamp = new Date();
-    console.log('usuario: ', user);
     const bodyHTML = `Se registró un nuevo usuario con los siguientes datos:
         <ul>
         <li>Usuario: ${user.email}</li>

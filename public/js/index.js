@@ -99,7 +99,6 @@ signupForm.addEventListener('submit', async (event) => {
             fullname: `${nameSignup.value} ${lastnameSignup.value}`,
             phone: phoneSignup.value,
         };
-        console.log('data signup: ', data);
         const dataJSON = JSON.stringify(data);
         let responseFetch = await fetch("http://localhost:8080/auth/sign-up", {
             headers: {

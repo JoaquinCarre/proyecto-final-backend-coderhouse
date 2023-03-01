@@ -69,7 +69,6 @@ linkChat.addEventListener('click', async () => {
 //imprimir productos en carrito
 function showProductsCart(data) {
     const item = document.createElement("tr")
-    console.log('data', data);
     item.innerHTML +=
         `<td>${data.title}</td>
         <td>${data.price}</td>
@@ -101,7 +100,6 @@ async function deleteProductCart(product_id) {
         } else {
             console.log(`se borra el producto con id ${product_id}`);
             cartProducts.innerHTML = "<tr><th>Nombre</th><th>Precio [$]</th><th>Imagen</th><th>Cantidad</th><th style='color:gray'>Eliminar Producto</th></tr>";
-            console.log('productos del carrito: ', cart[0].products)
             cart[0].products.forEach((prod) => {
                 showProductsCart(prod);
             });

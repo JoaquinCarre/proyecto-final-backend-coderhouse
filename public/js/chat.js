@@ -67,7 +67,6 @@ formChat.addEventListener("submit", async function (e) {
   e.preventDefault()
   const userLog = await fetch("http://localhost:8080/users/me");
   const user = await userLog.json();
-  console.log('mail usuario: ', user)
   const data = {
     author: {
       email: user.email,
