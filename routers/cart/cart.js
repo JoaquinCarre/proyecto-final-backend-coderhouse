@@ -12,7 +12,7 @@ router.post('/:id', verifyToken, addProductToCart)
 router.put('/:id', verifyToken, addSameProduct)
 router.delete('/:id', verifyToken, deleteCart)
 router.delete('/:id/:product_id', verifyToken, deleteProductFromCart)
-router.post('/:id/:user_id', verifyToken, buyCart)
-router.post('/order/:id', verifyToken, newOrder);
+router.post('/:cart_id/:user_id', verifyToken, buyCart)
+router.post('/order/new/:id', verifyToken, newOrder);
 
 export default router;

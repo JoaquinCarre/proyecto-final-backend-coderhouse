@@ -125,6 +125,8 @@ cartButton.addEventListener('click', async () => {
 });
 
 async function buyCart(cart_id, user_id) {
+    console.log('cart Id: ', cart_id);
+    console.log('user Id: ', user_id);
     const cartLog = await fetch("http://localhost:8080/carrito/carritos");
     const cart = await cartLog.json();
     let message = '';
@@ -148,7 +150,7 @@ async function buyCart(cart_id, user_id) {
             products: cart[0].products
         }
         const orderJSON = JSON.stringify(buyedOrder);
-        await fetch(`http://localhost:8080/carrito/order/${cart_id}`, {
+        await fetch(`http://localhost:8080/carrito/order/new/${cart_id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Content-Length': dataJSON.length

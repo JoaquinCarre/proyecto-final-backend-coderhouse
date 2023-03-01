@@ -104,12 +104,11 @@ export async function deleteProductFromCart(req, res, next) {
 
 export async function buyCart(req, res, next) {
   try {
-    const { id, user_id } = req.params;
+    const { cart_id, user_id } = req.params;
     const productsCart = req.body;
     const user = await getUser(user_id);
-    console.log('usuario error: ', user);
     const timestamp = new Date();
-    const message = `Gracias por su compra ${user.email}! Su orden de compra es: '${id}' generada en la fecha y hora ${timestamp.toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' })} ${timestamp.getHours()}:${timestamp.getMinutes()}:${timestamp.getSeconds()}. Su pedido es:
+    const message = `Gracias por su compra ${user.email}! Su orden de compra es: '${cart_id}' generada en la fecha y hora ${timestamp.toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' })} ${timestamp.getHours()}:${timestamp.getMinutes()}:${timestamp.getSeconds()}. Su pedido es:
     <p>${productsCart.message}</p>
     <p>estado: generada</p>`;
     await sendMail(`Usuario ${user.email} realizó una compra`, message, process.env.MAIL_NODEMAILER);
@@ -125,9 +124,8 @@ export async function newOrder(req, res, next) {
   try {
     const { id } = req.params;
     const orderBody = req.body;
-    console.log('ordenBody: ', orderBody);
     const newOrder = {...orderBody, id}
-    const order = await orderServices.addNewOrder(newOrder);
+    await orderServices.addNewOrder(newOrder);
     res.status(200).json(`Orden de compra ${id} almacenada!`)
   } catch (err) {
     logger.error(`${err.message}`);
