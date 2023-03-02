@@ -34,3 +34,5 @@ npm run dev
 ```
 http://localhost:8080/api/info
 ```
+
+- Al ingresar con una cuenta registrada, el cliente tendrá una sesión activa de usuario con tiempo de expiración de 10 minutos.

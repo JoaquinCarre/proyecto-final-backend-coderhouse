@@ -30,7 +30,14 @@ export async function getByCategory(req, res, next) {
     const { category } = req.params;
     const products = await productServices.getAll();
     const filteredProducts = products.filter(prod => prod.category === category);
-    res.json({ filteredProducts });
+    if (!filteredProducts.length) {
+      logger.warn('No existe la categoría solicitada de juegos de mesa');
+      const customError = new Error('No existe la categoría solicitada de juegos de mesa');
+      customError.id = 3;
+      next(customError);      
+    } else {
+      res.json({ filteredProducts });
+    }
   } catch (err) {
     logger.error(err.message);
     const customError = new Error(err.message);
