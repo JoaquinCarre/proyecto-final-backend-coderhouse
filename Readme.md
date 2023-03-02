@@ -29,3 +29,8 @@ npm run dev
 - En la versión 0.0.1 la creación del carrito se compartirá por todos los usuarios, solo se realizó para demostrar que funciona la modificación de este. En próximas versiones se cambiará para que haya un carrito generado por usuario registrado.
 
 - Cambiar en el archivo '.env' el valor de MAIL_NODEMAILER por el email destinatario al cual desees que llegue al registrarse un nuevo usuario o al realizar una compra del carrito.
+
+- Para observar la configuración del servidor entrar a la ruta:
+```
+http://localhost:8080/api/info
+```
