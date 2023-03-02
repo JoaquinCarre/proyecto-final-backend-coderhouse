@@ -26,7 +26,7 @@ const errorMessage = document.getElementById('text-error-register');
 
 //Carga de la página
 async function loadWebPage() {
-    const userLog = await fetch("http://localhost:8080/users/me");
+    const userLog = await fetch("https://proyecto-backend-railway-production.up.railway.app/users/me");
     loading.classList.remove('d-none');
     if (userLog.status === 200) {
         setTimeout(async () => {
@@ -72,7 +72,7 @@ signinForm.addEventListener('submit', async (event) => {
         password: passwordSignin.value
     };
     const dataJSON = JSON.stringify(data);
-    let responseFetch = await fetch("http://localhost:8080/auth/sign-in", {
+    let responseFetch = await fetch("https://proyecto-backend-railway-production.up.railway.app/auth/sign-in", {
         headers: {
             'Content-Type': 'application/json',
             'Content-Length': dataJSON.length
@@ -100,7 +100,7 @@ signupForm.addEventListener('submit', async (event) => {
             phone: phoneSignup.value,
         };
         const dataJSON = JSON.stringify(data);
-        let responseFetch = await fetch("http://localhost:8080/auth/sign-up", {
+        let responseFetch = await fetch("https://proyecto-backend-railway-production.up.railway.app/auth/sign-up", {
             headers: {
                 'Content-Type': 'application/json',
                 'Content-Length': dataJSON.length

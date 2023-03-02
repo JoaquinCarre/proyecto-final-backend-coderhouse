@@ -15,13 +15,13 @@ const buttonsCart = document.getElementById('buttons-cart');
 const messageCart = document.getElementById('message-cart');
 
 async function addExtrasCart() {
-    const cartLog = await fetch("http://localhost:8080/carrito/carritos");
+    const cartLog = await fetch("https://proyecto-backend-railway-production.up.railway.app/carrito/carritos");
     const cart = await cartLog.json();
     let total = 0;
     cart[0].products.forEach((prod) => {
         total = total + prod.price * prod.quantity;
     });
-    const userLog = await fetch("http://localhost:8080/users/me");
+    const userLog = await fetch("https://proyecto-backend-railway-production.up.railway.app/users/me");
     const user = await userLog.json();
     cartProducts.innerHTML += `<td colspan="4"></td><td class="fw-bold">Total: $${total} </td>`;
     buttonsCart.innerHTML = `<button id='delete-cart-button' onclick="deleteCart('${cart[0]._id}')" class='btn btn-danger'>Eliminar Carrito</button>
@@ -44,7 +44,7 @@ loadWebPage()
 
 //Botón para Desconectarse de la sesión
 signOutButton.addEventListener('click', async () => {
-    const responseFetch = await fetch("http://localhost:8080/auth/sign-out", {
+    const responseFetch = await fetch("https://proyecto-backend-railway-production.up.railway.app/auth/sign-out", {
         headers: {
             'Content-Type': 'application/json'
         },
@@ -83,16 +83,16 @@ function showProductsCart(data) {
 }
 
 async function deleteProductCart(product_id) {
-    const cartLog = await fetch("http://localhost:8080/carrito/carritos");
+    const cartLog = await fetch("https://proyecto-backend-railway-production.up.railway.app/carrito/carritos");
     const cart = await cartLog.json();
-    let responseFetch = await fetch(`http://localhost:8080/carrito/${cart[0]._id}/${product_id}`, {
+    let responseFetch = await fetch(`https://proyecto-backend-railway-production.up.railway.app/carrito/${cart[0]._id}/${product_id}`, {
         headers: {
             'Content-Type': 'application/json'
         },
         method: 'DELETE'
     });
     if (responseFetch.status === 200) {
-        const cartLog = await fetch("http://localhost:8080/carrito/carritos");
+        const cartLog = await fetch("https://proyecto-backend-railway-production.up.railway.app/carrito/carritos");
         const cart = await cartLog.json();
         if (!cart[0].products.length) {
             deleteCart(cart[0]._id);
@@ -109,7 +109,7 @@ async function deleteProductCart(product_id) {
 }
 
 async function deleteCart(cart_id) {
-    let responseFetch = await fetch(`http://localhost:8080/carrito/${cart_id}`, {
+    let responseFetch = await fetch(`https://proyecto-backend-railway-production.up.railway.app/carrito/${cart_id}`, {
         headers: {
             'Content-Type': 'application/json'
         },
@@ -127,7 +127,7 @@ cartButton.addEventListener('click', async () => {
 async function buyCart(cart_id, user_id) {
     console.log('cart Id: ', cart_id);
     console.log('user Id: ', user_id);
-    const cartLog = await fetch("http://localhost:8080/carrito/carritos");
+    const cartLog = await fetch("https://proyecto-backend-railway-production.up.railway.app/carrito/carritos");
     const cart = await cartLog.json();
     let message = '';
     await cart[0].products.forEach((prod) => {
@@ -136,7 +136,7 @@ async function buyCart(cart_id, user_id) {
     const messageObject = { message };
     const dataJSON = JSON.stringify(messageObject);
     messageCart.innerText = 'Procesando compra...';
-    let responseFetch = await fetch(`http://localhost:8080/carrito/${cart_id}/${user_id}`, {
+    let responseFetch = await fetch(`https://proyecto-backend-railway-production.up.railway.app/carrito/${cart_id}/${user_id}`, {
         headers: {
             'Content-Type': 'application/json',
             'Content-Length': dataJSON.length
@@ -150,7 +150,7 @@ async function buyCart(cart_id, user_id) {
             products: cart[0].products
         }
         const orderJSON = JSON.stringify(buyedOrder);
-        await fetch(`http://localhost:8080/carrito/order/new/${cart_id}`, {
+        await fetch(`https://proyecto-backend-railway-production.up.railway.app/carrito/order/new/${cart_id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Content-Length': dataJSON.length
