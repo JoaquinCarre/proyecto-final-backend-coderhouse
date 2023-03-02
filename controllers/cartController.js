@@ -8,7 +8,7 @@ export async function indexCart(_, res, next) {
   try {
     const cart = await cartServices.getCarts();
     const productos = cart[0].products;
-    res.status(200).render('cart', { productos });
+    res.status(200).render('cart.handlebars', { productos });
   } catch (err) {
     logger.error(err.message);
     next(err);

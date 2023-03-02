@@ -4,7 +4,7 @@ import productServices from '../services/productServices.js';
 export async function indexProducts(_, res, next) {
   try {
     const productos = await productServices.getAll();
-    res.status(200).render('products', { productos });
+    res.status(200).render('products.handlebars', { productos });
   } catch (err) {
     logger.error(err.message);
     next(err);

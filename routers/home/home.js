@@ -9,9 +9,9 @@ router.get('/', async (req, res, next) => {
         if (cookies) {
             res.redirect('/productos');
         } else {
-            res.render('index');
+            res.render('index.handlebars');
         }
-        res.render('index');
+/*         res.render('index.handlebars'); */
     } catch (err) {
         logger.error(`${err.message}`);
         next(err);

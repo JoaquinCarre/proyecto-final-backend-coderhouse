@@ -13,7 +13,7 @@ import cluster from "cluster";
 import minimist from 'minimist';
 import { logger } from './logs/logger.js';
 
-const argv = minimist(process.argv.slice(2), {
+export const argv = minimist(process.argv.slice(2), {
     default: { cluster: false },
     alias: { ec: 'cluster' }
 });

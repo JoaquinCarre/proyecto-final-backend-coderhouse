@@ -3,7 +3,7 @@ import messageAPI from './messagesController.js';
 
 export async function indexChat(_, res, next) {
     try {
-        res.status(200).render('chat');
+        res.status(200).render('chat.handlebars');
     } catch (err) {
         logger.error(err.message);
         next(err);
