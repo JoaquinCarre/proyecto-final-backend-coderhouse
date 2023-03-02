@@ -49,6 +49,10 @@ if (ENABLE_CLUSTER && cluster.isPrimary) {
     app.set("views", path.join(__dirname, "views"));
     app.set("view engine", "handlebars");
 
+    app.engine('pug', require('pug').__express);
+    app.set('view engine', 'pug');
+    app.set('views', path.join(__dirname, 'views'));
+
     app.use('/', indexRouter)
 
     setEvents();
