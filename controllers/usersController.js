@@ -13,7 +13,9 @@ export async function getAuthUser(req, res, next) {
     res.json(user);
   } catch (err) {
     logger.error(err.message);
-    next(err);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }
 
@@ -24,7 +26,9 @@ export async function registerUser(req, res, next) {
     res.json(user);
   } catch (err) {
     logger.error(err.message);
-    next(err);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }
 
@@ -34,7 +38,9 @@ export async function getAllUsers(_, res, next) {
     res.json(users);
   } catch (err) {
     logger.error(err.message);
-    next(err);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }
 
@@ -48,7 +54,9 @@ export async function getOneUser(req, res, next) {
     res.json(user)
   } catch (err) {
     logger.error(err.message);
-    next(err);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }
 
@@ -62,7 +70,9 @@ export async function updateUser(req, res, next) {
     res.status(204).end()
   } catch (err) {
     logger.error(err.message);
-    next(err);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }
 
@@ -76,7 +86,9 @@ export async function deleteOneUser(req, res, next) {
     res.status(204).end()
   } catch (err) {
     logger.error(err.message);
-    next(err);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }
 

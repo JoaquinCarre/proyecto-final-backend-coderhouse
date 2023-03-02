@@ -12,7 +12,9 @@ export async function getCookie(req, res, next) {
     }
   } catch (err) {
     logger.error(`${err.message}`);
-    next(err);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }
 
@@ -26,9 +28,10 @@ export async function signIn(req, res, next) {
     })
   }
   catch (err) {
-    logger.error(`No ha sido posible loguearse:
-    ${err.message}`);
-    next(err);
+    logger.error(`No ha sido posible loguearse: ${err.message}`);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }
 
@@ -37,9 +40,10 @@ export async function signOut(_, res, next) {
     res.clearCookie('token');
     res.status(200).json({ message: `Hasta luego!.` });
   } catch (err) {
-    logger.error(`No ha sido posible desloguearse de la cuenta:
-      ${err.message}`);
-    return next(err)
+    logger.error(`No ha sido posible desloguearse de la cuenta: ${err.message}`);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }
 
@@ -57,7 +61,9 @@ export async function signUp(req, res) {
     await sendMail(`Usuario ${user.email} se registró.`, bodyHTML, process.env.MAIL_NODEMAILER);
     res.json({ message: `Usuario ${user.email} se registró.`, user });
   } catch (err) {
-    logger.error(`No es posible registrarse:
-    ${err.message}`);
+    logger.error(`No es posible registrarse: ${err.message}`);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }

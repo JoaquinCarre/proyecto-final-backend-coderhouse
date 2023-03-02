@@ -7,7 +7,9 @@ export async function indexProducts(_, res, next) {
     res.status(200).render('products.handlebars', { productos });
   } catch (err) {
     logger.error(err.message);
-    next(err);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }
 
@@ -17,7 +19,9 @@ export async function getAllProducts(_, res, next) {
     res.status(200).json(productos);
   } catch (err) {
     logger.error(err.message);
-    next(err);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }
 
@@ -29,16 +33,25 @@ export async function getByCategory(req, res, next) {
     res.json({ filteredProducts });
   } catch (err) {
     logger.error(err.message);
-    next(err);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }
 
 export async function getImageProduct(req, res, next) {
-  const { params: { id } } = req;
-  const product = await productServices.getProductById(id);
-  const ruta = product.thumbnail;
-  const nombreArchivo = ruta.replace("./img/", "");
-  res.send(`<img src="../../img/${nombreArchivo}" alt="imagen${product.title}">`)
+  try {
+    const { params: { id } } = req;
+    const product = await productServices.getProductById(id);
+    const ruta = product.thumbnail;
+    const nombreArchivo = ruta.replace("./img/", "");
+    res.send(`<img src="../../img/${nombreArchivo}" alt="imagen${product.title}">`)
+  } catch (err) {
+    logger.error(err.message);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
+  }
 }
 
 export async function addNewProduct(req, res, next) {
@@ -48,7 +61,9 @@ export async function addNewProduct(req, res, next) {
     res.status(201).json(response);
   } catch (err) {
     logger.error(err.message);
-    next(err);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }
 
@@ -62,7 +77,9 @@ export async function getProduct(req, res, next) {
     res.status(200).json(product);
   } catch (err) {
     logger.error(err.message);
-    next(err);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }
 
@@ -74,7 +91,9 @@ export async function updateProduct(req, res, next) {
     res.status(201).json(product);
   } catch (err) {
     logger.error(err.message);
-    next(err);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }
 
@@ -85,6 +104,8 @@ export async function deleteProduct(req, res, next) {
     res.status(200).json(response);
   } catch (err) {
     logger.error(err.message);
-    next(err);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }

@@ -6,7 +6,9 @@ export async function indexChat(_, res, next) {
         res.status(200).render('chat.handlebars');
     } catch (err) {
         logger.error(err.message);
-        next(err);
+        const customError = new Error(err.message);
+        customError.id = 3;
+        next(customError);
     }
 }
 
@@ -18,6 +20,8 @@ export async function getChatsByEmail(req, res, next) {
         res.json({ filteredMessages });
     } catch (err) {
         logger.error(err.message);
-        next(err);
+        const customError = new Error(err.message);
+        customError.id = 3;
+        next(customError);
     }
 }

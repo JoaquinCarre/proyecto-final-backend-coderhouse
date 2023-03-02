@@ -17,7 +17,9 @@ export async function indexInfo(_, res, next) {
         }
         res.render('info.pug', { data });
     } catch (err) {
-        logger.error(`${err.message}`);
-        next(err);
+        logger.error(err.message);
+        const customError = new Error(err.message);
+        customError.id = 3;
+        next(customError);
     }
 }

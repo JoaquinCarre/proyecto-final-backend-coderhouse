@@ -11,7 +11,9 @@ export async function indexCart(_, res, next) {
     res.status(200).render('cart.handlebars', { productos });
   } catch (err) {
     logger.error(err.message);
-    next(err);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }
 
@@ -19,8 +21,11 @@ export async function getAllCarts(_, res, next) {
   try {
     const cart = await cartServices.getCarts();
     res.json(cart);
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    logger.error(err.message);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }
 
@@ -38,8 +43,10 @@ export async function createCart(_, res, next) {
       res.status(400).json({ error: 'ya hay un carrito creado' });
     }
   } catch (err) {
-    logger.error(`${err.message}`);
-    next(err);
+    logger.error(err.message);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }
 
@@ -49,8 +56,10 @@ export async function getCart(req, res, next) {
     const cart = await cartServices.getCartByid(id);
     res.json(cart);
   } catch (err) {
-    logger.error(`${err.message}`);
-    next(err);
+    logger.error(err.message);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }
 
@@ -62,8 +71,10 @@ export async function addProductToCart(req, res, next) {
     logger.info('Se añadió un nuevo producto al carrito');
     res.status(200).json(addProduct);
   } catch (err) {
-    logger.error(`${err.message}`);
-    next(err);
+    logger.error(err.message);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }
 
@@ -74,8 +85,10 @@ export async function addSameProduct(req, res, next) {
     const updateCart = await cartServices.uploadCartQuantity(id, product);
     res.status(200).json(updateCart);
   } catch (err) {
-    logger.error(`${err.message}`);
-    next(err);
+    logger.error(err.message);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }
 
@@ -85,8 +98,10 @@ export async function deleteCart(req, res, next) {
     const deletedCart = await cartServices.deleteCartById(id)
     res.status(200).json(deletedCart);
   } catch (err) {
-    logger.error(`${err.message}`);
-    next(err);
+    logger.error(err.message);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }
 
@@ -97,8 +112,10 @@ export async function deleteProductFromCart(req, res, next) {
     logger.info('Se eliminió un producto');
     res.status(200).json(deletedItemCart);
   } catch (err) {
-    logger.error(`${err.message}`);
-    next(err);
+    logger.error(err.message);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }
 
@@ -115,8 +132,10 @@ export async function buyCart(req, res, next) {
     logger.info('La compra ya ha sido comunicada al proveedor');
     res.status(200).json(message);
   } catch (err) {
-    logger.error(`${err.message}`);
-    next(err);
+    logger.error(err.message);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }
 
@@ -128,7 +147,9 @@ export async function newOrder(req, res, next) {
     await orderServices.addNewOrder(newOrder);
     res.status(200).json(`Orden de compra ${id} almacenada!`)
   } catch (err) {
-    logger.error(`${err.message}`);
-    next(err);
+    logger.error(err.message);
+    const customError = new Error(err.message);
+    customError.id = 3;
+    next(customError);
   }
 }

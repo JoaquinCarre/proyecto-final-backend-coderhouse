@@ -3,7 +3,9 @@ import jwt from "jsonwebtoken";
 export function verifyToken(req, res, next) {
     const token = req.cookies.token;
     if (!token) {
-        return res.status(401).json({ error: 'Token missing' });
+        const customError = new Error('Falta el token de autenticación');
+        customError.id = 2;
+        next(customError);
     }
 
     try {
@@ -11,6 +13,8 @@ export function verifyToken(req, res, next) {
         req.user = decodedToken;
         next();
     } catch (error) {
-        res.status(401).json({ error: 'Token invalid' });
+        const customError = new Error('Token de autenticación inválido');
+        customError.id = 2;
+        next(customError);
     }
 };

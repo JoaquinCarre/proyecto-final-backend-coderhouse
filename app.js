@@ -13,6 +13,7 @@ import cluster from "cluster";
 import minimist from 'minimist';
 import { logger } from './logs/logger.js';
 import pug from 'pug';
+import ejs from 'ejs';
 
 export const argv = minimist(process.argv.slice(2), {
     default: { cluster: false },
@@ -54,7 +55,17 @@ if (ENABLE_CLUSTER && cluster.isPrimary) {
     app.set('view engine', 'pug');
     app.set('views', path.join(__dirname, 'views'));
 
+    app.engine('ejs', ejs.renderFile);
+    app.set('view engine', 'ejs');
+    const errorViewPath = path.join(__dirname, 'views', 'error.ejs');
+    
     app.use('/', indexRouter)
+
+    app.use((err, _, res, next) => {
+        // Renderiza la vista de error con EJS y los detalles del error
+        res.status(500);
+        res.render(errorViewPath, { id: err.id, message: err.message });
+      });
 
     setEvents();
 

@@ -9,7 +9,9 @@ router.get("*", (req, res, next) => {
         res.redirect("/");
     } catch (err) {
         logger.error(`${err.message}`);
-        next(err);
+        const customError = new Error(err.message);
+        customError.id = 1;
+        next(customError);
     }
 });
 
