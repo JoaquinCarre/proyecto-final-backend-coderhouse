@@ -12,6 +12,7 @@ import os from "os";
 import cluster from "cluster";
 import minimist from 'minimist';
 import { logger } from './logs/logger.js';
+import pug from 'pug';
 
 export const argv = minimist(process.argv.slice(2), {
     default: { cluster: false },
@@ -49,7 +50,7 @@ if (ENABLE_CLUSTER && cluster.isPrimary) {
     app.set("views", path.join(__dirname, "views"));
     app.set("view engine", "handlebars");
 
-    app.engine('pug', require('pug').__express);
+    app.engine('pug', pug.__express);
     app.set('view engine', 'pug');
     app.set('views', path.join(__dirname, 'views'));
 
