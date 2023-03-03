@@ -5,7 +5,7 @@ const repository = new CartRepository();
 async function getCarts() {
     return await repository.getAllShopCarts();
 }
-//CONTINUAR CON EL RESTO DE LAS FUNCIONES Y VER SI FALTA ALGUNA
+
 async function createANewCart(data) {
     return await repository.createNew(data);
 }

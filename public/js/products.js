@@ -93,8 +93,6 @@ async function addProductToCart(id) {
             cartButton.classList.remove('d-none');
         }
     } else {
-/*         const cartLog = await fetch("http://localhost:8080/carrito/carritos");
-        const cart = await cartLog.json(); */
         let productIndex = cart.products.findIndex(prod => prod._id === productToAdd._id);
         if (productIndex !== -1) {
             cart.products[productIndex].quantity += 1;
