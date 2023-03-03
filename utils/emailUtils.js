@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-import { logger } from '../logs/logger';
+import { logger } from '../logs/logger.js';
 
 const nodemailerPass = process.env.NODEMAILER_PASS;
 
