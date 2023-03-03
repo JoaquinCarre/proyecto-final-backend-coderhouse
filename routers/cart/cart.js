@@ -7,7 +7,7 @@ const router = Router();
 router.get('/', verifyToken, indexCart)
 router.get('/carritos', verifyToken, getAllCarts)
 router.post('/', verifyToken, createCart)
-router.get('/:id', verifyToken, getCart)
+router.get('/:email', verifyToken, getCart)
 router.post('/:id', verifyToken, addProductToCart)
 router.put('/:id', verifyToken, addSameProduct)
 router.delete('/:id', verifyToken, deleteCart)

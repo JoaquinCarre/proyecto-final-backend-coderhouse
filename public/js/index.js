@@ -93,6 +93,7 @@ signinForm.addEventListener('submit', async (event) => {
 signupForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     if (passwordSignup.value === passwordToCompare.value) {
+        errorMessage.innerHTML = '<h5>Procesando registro...</h5>';
         const data = {
             email: emailSignup.value,
             password: passwordSignup.value,
@@ -109,26 +110,29 @@ signupForm.addEventListener('submit', async (event) => {
             body: dataJSON
         });
         if (responseFetch.status === 200) {
-            let response = await responseFetch.json();
-            /*             outputDiv.classList.remove('d-none');
-                        outputDiv.classList.add('text-white'); */
-            signupDiv.classList.add('d-none');
-            signinDiv.classList.remove('d-none');
-            /*             userOutput.innerText = response.message; */
+            errorMessage.innerHTML = '<h5 style="color:green">Registro exitoso</h5>';
+            await responseFetch.json();
+            setTimeout(() => {
+                signupDiv.classList.add('d-none');
+                signinDiv.classList.remove('d-none');
+            }, 1000);
         }
         else {
             signupDiv.classList.add('d-none');
         }
-        nameSignup.value = '';
-        lastnameSignup.value = '';
-        phoneSignup.value = '';
-        emailSignup.value = '';
-        passwordSignup.value = '';
-        passwordToCompare.value = '';
-    } else {
-        errorMessage.innerHTML = `<h5 style="color:red">Las contraseñas no coinciden<h5>`
         setTimeout(() => {
-
+            nameSignup.value = '';
+            lastnameSignup.value = '';
+            phoneSignup.value = '';
+            emailSignup.value = '';
+            passwordSignup.value = '';
+            passwordToCompare.value = '';
+            errorMessage.innerHTML = '';
+        }, 1000);
+    } else {
+        errorMessage.innerHTML = `<h5 style="color:red">Las contraseñas no coinciden<h5>`;
+        setTimeout(() => {
+            errorMessage.innerHTML = '';
         }, 2000)
     }
 });

@@ -6,9 +6,7 @@ import { getUser } from '../services/userServices.js';
 
 export async function indexCart(_, res, next) {
   try {
-    const cart = await cartServices.getCarts();
-    const productos = cart[0].products;
-    res.status(200).render('cart.handlebars', { productos });
+    res.status(200).render('cart.handlebars');
   } catch (err) {
     logger.error(err.message);
     const customError = new Error(err.message);
@@ -29,11 +27,13 @@ export async function getAllCarts(_, res, next) {
   }
 }
 
-export async function createCart(_, res, next) {
+export async function createCart(req, res, next) {
   try {
-    const isCart = await cartServices.getCarts();
-    if (!isCart.length) {
+    const userEmail = req.body;
+    const isCart = await cartServices.getCartByEmail(userEmail);
+    if (!isCart) {
       const newCart = await cartServices.createANewCart({
+        email: userEmail.email,
         timestamp: Date.now(),
         products: []
       });
@@ -52,8 +52,8 @@ export async function createCart(_, res, next) {
 
 export async function getCart(req, res, next) {
   try {
-    const { params: { id } } = req;
-    const cart = await cartServices.getCartByid(id);
+    const { params: { email } } = req;
+    const cart = await cartServices.getCartByEmail(email);
     res.json(cart);
   } catch (err) {
     logger.error(err.message);
@@ -128,7 +128,7 @@ export async function buyCart(req, res, next) {
     const message = `Gracias por su compra ${user.email}! Su orden de compra es: '${cart_id}' generada en la fecha y hora ${timestamp.toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' })} ${timestamp.getHours()}:${timestamp.getMinutes()}:${timestamp.getSeconds()}. Su pedido es:
     <p>${productsCart.message}</p>
     <p>estado: generada</p>`;
-    await sendMail(`Usuario ${user.email} realizó una compra`, message, user.email);
+    await sendMail(`Usuario ${user.email} realizó una compra`, message, process.env.MAIL_NODEMAILER);
     logger.info('La compra ya ha sido comunicada al proveedor');
     res.status(200).json(message);
   } catch (err) {
