@@ -9,8 +9,7 @@ export async function indexCart(_, res, next) {
     res.status(200).render('cart.handlebars');
   } catch (err) {
     logger.error(err.message);
-    const customError = new Error(err.message);
-    customError.id = 3;
+    const customError = new Error('Ups! Algo ha salido mal');
     next(customError);
   }
 }
@@ -21,8 +20,7 @@ export async function getAllCarts(_, res, next) {
     res.json(cart);
   } catch (err) {
     logger.error(err.message);
-    const customError = new Error(err.message);
-    customError.id = 3;
+    const customError = new Error('Ups! Algo ha salido mal');
     next(customError);
   }
 }
@@ -44,8 +42,7 @@ export async function createCart(req, res, next) {
     }
   } catch (err) {
     logger.error(err.message);
-    const customError = new Error(err.message);
-    customError.id = 3;
+    const customError = new Error('Ups! Algo ha salido mal');
     next(customError);
   }
 }
@@ -57,8 +54,7 @@ export async function getCart(req, res, next) {
     res.json(cart);
   } catch (err) {
     logger.error(err.message);
-    const customError = new Error(err.message);
-    customError.id = 3;
+    const customError = new Error('Ups! Algo ha salido mal');
     next(customError);
   }
 }
@@ -72,8 +68,7 @@ export async function addProductToCart(req, res, next) {
     res.status(200).json(addProduct);
   } catch (err) {
     logger.error(err.message);
-    const customError = new Error(err.message);
-    customError.id = 3;
+    const customError = new Error('Ups! Algo ha salido mal');
     next(customError);
   }
 }
@@ -86,8 +81,7 @@ export async function addSameProduct(req, res, next) {
     res.status(200).json(updateCart);
   } catch (err) {
     logger.error(err.message);
-    const customError = new Error(err.message);
-    customError.id = 3;
+    const customError = new Error('Ups! Algo ha salido mal');
     next(customError);
   }
 }
@@ -99,8 +93,7 @@ export async function deleteCart(req, res, next) {
     res.status(200).json(deletedCart);
   } catch (err) {
     logger.error(err.message);
-    const customError = new Error(err.message);
-    customError.id = 3;
+    const customError = new Error('Ups! Algo ha salido mal');
     next(customError);
   }
 }
@@ -113,8 +106,7 @@ export async function deleteProductFromCart(req, res, next) {
     res.status(200).json(deletedItemCart);
   } catch (err) {
     logger.error(err.message);
-    const customError = new Error(err.message);
-    customError.id = 3;
+    const customError = new Error('Ups! Algo ha salido mal');
     next(customError);
   }
 }
@@ -133,8 +125,7 @@ export async function buyCart(req, res, next) {
     res.status(200).json(message);
   } catch (err) {
     logger.error(err.message);
-    const customError = new Error(err.message);
-    customError.id = 3;
+    const customError = new Error('Ups! Algo ha salido mal');
     next(customError);
   }
 }
@@ -148,8 +139,7 @@ export async function newOrder(req, res, next) {
     res.status(200).json(`Orden de compra ${id} almacenada!`)
   } catch (err) {
     logger.error(err.message);
-    const customError = new Error(err.message);
-    customError.id = 3;
+    const customError = new Error('Ups! Algo ha salido mal');
     next(customError);
   }
 }

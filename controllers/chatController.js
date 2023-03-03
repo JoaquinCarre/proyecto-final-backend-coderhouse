@@ -6,8 +6,7 @@ export async function indexChat(_, res, next) {
         res.status(200).render('chat.handlebars');
     } catch (err) {
         logger.error(err.message);
-        const customError = new Error(err.message);
-        customError.id = 3;
+        const customError = new Error('Ups! Algo ha salido mal');
         next(customError);
     }
 }
@@ -20,8 +19,7 @@ export async function getChatsByEmail(req, res, next) {
         res.json({ filteredMessages });
     } catch (err) {
         logger.error(err.message);
-        const customError = new Error(err.message);
-        customError.id = 3;
+        const customError = new Error('Ups! Algo ha salido mal');
         next(customError);
     }
 }

@@ -12,8 +12,7 @@ export async function getCookie(req, res, next) {
     }
   } catch (err) {
     logger.error(`${err.message}`);
-    const customError = new Error(err.message);
-    customError.id = 3;
+    const customError = new Error('Ups! Algo ha salido mal');
     next(customError);
   }
 }
@@ -29,8 +28,7 @@ export async function signIn(req, res, next) {
   }
   catch (err) {
     logger.error(`No ha sido posible loguearse: ${err.message}`);
-    const customError = new Error(err.message);
-    customError.id = 3;
+    const customError = new Error('Ups! Algo ha salido mal');
     next(customError);
   }
 }
@@ -41,8 +39,7 @@ export async function signOut(_, res, next) {
     res.status(200).json({ message: `Hasta luego!.` });
   } catch (err) {
     logger.error(`No ha sido posible desloguearse de la cuenta: ${err.message}`);
-    const customError = new Error(err.message);
-    customError.id = 3;
+    const customError = new Error('Ups! Algo ha salido mal');
     next(customError);
   }
 }
@@ -62,8 +59,7 @@ export async function signUp(req, res) {
     res.json({ message: `Usuario ${user.email} se registró.`, user });
   } catch (err) {
     logger.error(`No es posible registrarse: ${err.message}`);
-    const customError = new Error(err.message);
-    customError.id = 3;
+    const customError = new Error('Ups! Algo ha salido mal');
     next(customError);
   }
 }

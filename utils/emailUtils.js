@@ -1,4 +1,6 @@
 import nodemailer from 'nodemailer';
+import { logger } from '../logs/logger';
+
 const nodemailerPass = process.env.NODEMAILER_PASS;
 
 const transporter = nodemailer.createTransport({
@@ -19,7 +21,9 @@ export async function sendMail(subject, body, target) {
     }
     try {
         await transporter.sendMail(mailOptions)
-    } catch (error) {
-        console.error('Error sending email: ' , error)
+    } catch (err) {
+        logger.error(`${err.message}`);
+        const customError = new Error('Ups! Algo ha salido mal');
+        next(customError);
     }
 }

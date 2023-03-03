@@ -18,8 +18,7 @@ export async function indexInfo(_, res, next) {
         res.render('info.pug', { data });
     } catch (err) {
         logger.error(err.message);
-        const customError = new Error(err.message);
-        customError.id = 3;
+        const customError = new Error('Ups! Algo ha salido mal');
         next(customError);
     }
 }

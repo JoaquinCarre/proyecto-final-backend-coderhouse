@@ -64,7 +64,7 @@ if (ENABLE_CLUSTER && cluster.isPrimary) {
     app.use((err, _, res, next) => {
         // Renderiza la vista de error con EJS y los detalles del error
         res.status(500);
-        res.render(errorViewPath, { id: err.id, message: err.message });
+        res.render(errorViewPath, { message: err.message });
       });
 
     setEvents();

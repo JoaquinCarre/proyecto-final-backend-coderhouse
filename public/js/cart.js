@@ -20,7 +20,6 @@ async function addExtrasCart() {
     const cartLog = await fetch(`https://proyecto-backend-railway-production.up.railway.app/carrito/${user.email}`);
     const cart = await cartLog.json();
     let total = 0;
-    console.log('carritooooo', cart)
     cart.products.forEach((prod) => {
         total = total + prod.price * prod.quantity;
     });
@@ -108,7 +107,6 @@ async function deleteProductCart(product_id) {
             deleteCart(cart._id);
             window.location.replace("/productos");
         } else {
-            console.log(`se borra el producto con id ${product_id}`);
             cartProducts.innerHTML = "<tr><th>Nombre</th><th>Precio [$]</th><th>Imagen</th><th>Cantidad</th><th style='color:gray'>Eliminar Producto</th></tr>";
             cart.products.forEach((prod) => {
                 showProductsCart(prod);
@@ -168,7 +166,6 @@ async function buyCart(cart_id, user_id) {
             method: 'POST',
             body: orderJSON
         });
-        console.log('Borrando Carrito por compra exitosa');
         messageCart.innerText = 'Gracias por tu compra! Sigue viendo el catálogo de nuestros productos';
         setTimeout(async () => {
             await deleteCart(cart_id);

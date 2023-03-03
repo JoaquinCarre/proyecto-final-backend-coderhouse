@@ -19,8 +19,7 @@ export async function getAllProducts(_, res, next) {
     res.status(200).json(productos);
   } catch (err) {
     logger.error(err.message);
-    const customError = new Error(err.message);
-    customError.id = 3;
+    const customError = new Error('Ups! Algo ha salido mal');
     next(customError);
   }
 }
@@ -32,16 +31,14 @@ export async function getByCategory(req, res, next) {
     const filteredProducts = products.filter(prod => prod.category === category);
     if (!filteredProducts.length) {
       logger.warn('No existe la categoría solicitada de juegos de mesa');
-      const customError = new Error('No existe la categoría solicitada de juegos de mesa');
-      customError.id = 3;
-      next(customError);      
+      const customError = new Error('Ups! Algo ha salido mal');
+      next(customError);
     } else {
       res.json({ filteredProducts });
     }
   } catch (err) {
     logger.error(err.message);
-    const customError = new Error(err.message);
-    customError.id = 3;
+    const customError = new Error('Ups! Algo ha salido mal');
     next(customError);
   }
 }
@@ -55,8 +52,7 @@ export async function getImageProduct(req, res, next) {
     res.send(`<img src="../../img/${nombreArchivo}" alt="imagen${product.title}">`)
   } catch (err) {
     logger.error(err.message);
-    const customError = new Error(err.message);
-    customError.id = 3;
+    const customError = new Error('Ups! Algo ha salido mal');
     next(customError);
   }
 }
@@ -68,8 +64,7 @@ export async function addNewProduct(req, res, next) {
     res.status(201).json(response);
   } catch (err) {
     logger.error(err.message);
-    const customError = new Error(err.message);
-    customError.id = 3;
+    const customError = new Error('Ups! Algo ha salido mal');
     next(customError);
   }
 }
@@ -84,8 +79,7 @@ export async function getProduct(req, res, next) {
     res.status(200).json(product);
   } catch (err) {
     logger.error(err.message);
-    const customError = new Error(err.message);
-    customError.id = 3;
+    const customError = new Error('Ups! Algo ha salido mal');
     next(customError);
   }
 }
@@ -98,8 +92,7 @@ export async function updateProduct(req, res, next) {
     res.status(201).json(product);
   } catch (err) {
     logger.error(err.message);
-    const customError = new Error(err.message);
-    customError.id = 3;
+    const customError = new Error('Ups! Algo ha salido mal');
     next(customError);
   }
 }
@@ -111,8 +104,7 @@ export async function deleteProduct(req, res, next) {
     res.status(200).json(response);
   } catch (err) {
     logger.error(err.message);
-    const customError = new Error(err.message);
-    customError.id = 3;
+    const customError = new Error('Ups! Algo ha salido mal');
     next(customError);
   }
 }
