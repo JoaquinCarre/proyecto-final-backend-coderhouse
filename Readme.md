@@ -39,3 +39,5 @@ http://localhost:8080/api/info
 
 - El desarrollo de esta app en producción está subido en Railway en el siguiente enlace:
 https://proyecto-backend-railway-production.up.railway.app/
+
+O visitando la rama de este mismo repositorio "proyecto-final-railway".

@@ -210,3 +210,4 @@
 {"level":"error","message":"Error al obtener el email del usuario"}
 {"level":"warn","message":"Acceso a ruta inexistente /favicon.ico con el método GET"}
 {"level":"warn","message":"Acceso a ruta inexistente /favicon.ico con el método GET"}
+{"level":"warn","message":"Acceso a ruta inexistente /favicon.ico con el método GET"}

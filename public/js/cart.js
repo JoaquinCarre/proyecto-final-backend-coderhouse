@@ -20,7 +20,6 @@ async function addExtrasCart() {
     const cartLog = await fetch(`http://localhost:8080/carrito/${user.email}`);
     const cart = await cartLog.json();
     let total = 0;
-    console.log('carritooooo', cart)
     cart.products.forEach((prod) => {
         total = total + prod.price * prod.quantity;
     });
