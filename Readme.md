@@ -36,3 +36,6 @@ http://localhost:8080/api/info
 ```
 
 - Al ingresar con una cuenta registrada, el cliente tendrá una sesión activa de usuario con tiempo de expiración de 10 minutos.
+
+- El desarrollo de esta app en producción está subido en Railway en el siguiente enlace:
+https://proyecto-backend-railway-production.up.railway.app/
