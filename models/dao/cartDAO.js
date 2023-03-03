@@ -10,6 +10,18 @@ export default class CartDAO extends MongoDBContainer {
         this.model = model;
     }
 
+    async getOneByEmail(email) {
+        try {
+            const emailStr = email.toString();
+            return await this.model.findOne({email: emailStr});
+        } catch (err) {
+            logger.error('No es posible obtener el carrito por email en la base de datos ', err);
+            const customError = new Error(`No es posible obtener el carrito por email en la base de datos: ${err}`);
+            customError.id = 4;
+            next(customError);
+        }
+    }
+
     async updateCartById(idCart, prod) {
         try {
             return this.model.findOneAndUpdate({ _id: idCart }, { $push: { products: prod } });

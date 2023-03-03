@@ -15,21 +15,29 @@ const buttonsCart = document.getElementById('buttons-cart');
 const messageCart = document.getElementById('message-cart');
 
 async function addExtrasCart() {
-    const cartLog = await fetch("http://localhost:8080/carrito/carritos");
-    const cart = await cartLog.json();
-    let total = 0;
-    cart[0].products.forEach((prod) => {
-        total = total + prod.price * prod.quantity;
-    });
     const userLog = await fetch("http://localhost:8080/users/me");
     const user = await userLog.json();
+    const cartLog = await fetch(`http://localhost:8080/carrito/${user.email}`);
+    const cart = await cartLog.json();
+    let total = 0;
+    console.log('carritooooo', cart)
+    cart.products.forEach((prod) => {
+        total = total + prod.price * prod.quantity;
+    });
     cartProducts.innerHTML += `<td colspan="4"></td><td class="fw-bold">Total: $${total} </td>`;
-    buttonsCart.innerHTML = `<button id='delete-cart-button' onclick="deleteCart('${cart[0]._id}')" class='btn btn-danger'>Eliminar Carrito</button>
-    <button id='buy-cart-button' onclick="buyCart('${cart[0]._id}', '${user._id}')" class='btn btn-success'>Comprar</button>`;
+    buttonsCart.innerHTML = `<button id='delete-cart-button' onclick="deleteCart('${cart._id}')" class='btn btn-danger'>Eliminar Carrito</button>
+    <button id='buy-cart-button' onclick="buyCart('${cart._id}', '${user._id}')" class='btn btn-success'>Comprar</button>`;
 }
 
 async function loadWebPage() {
     loading.classList.remove('d-none');
+    const userLog = await fetch("http://localhost:8080/users/me");
+    const user = await userLog.json();
+    const cartLog = await fetch(`http://localhost:8080/carrito/${user.email}`);
+    const cart = await cartLog.json();
+    cart.products.forEach((prod) => {
+        showProductsCart(prod);
+    });
     addExtrasCart();
     setTimeout(async () => {
         loading.classList.add('d-none');
@@ -83,24 +91,26 @@ function showProductsCart(data) {
 }
 
 async function deleteProductCart(product_id) {
-    const cartLog = await fetch("http://localhost:8080/carrito/carritos");
+    const userLog = await fetch("http://localhost:8080/users/me");
+    const user = await userLog.json();
+    const cartLog = await fetch(`http://localhost:8080/carrito/${user.email}`);
     const cart = await cartLog.json();
-    let responseFetch = await fetch(`http://localhost:8080/carrito/${cart[0]._id}/${product_id}`, {
+    let responseFetch = await fetch(`http://localhost:8080/carrito/${cart._id}/${product_id}`, {
         headers: {
             'Content-Type': 'application/json'
         },
         method: 'DELETE'
     });
     if (responseFetch.status === 200) {
-        const cartLog = await fetch("http://localhost:8080/carrito/carritos");
+        const cartLog = await fetch(`http://localhost:8080/carrito/${user.email}`);
         const cart = await cartLog.json();
-        if (!cart[0].products.length) {
-            deleteCart(cart[0]._id);
+        if (!cart.products.length) {
+            deleteCart(cart._id);
             window.location.replace("/productos");
         } else {
             console.log(`se borra el producto con id ${product_id}`);
             cartProducts.innerHTML = "<tr><th>Nombre</th><th>Precio [$]</th><th>Imagen</th><th>Cantidad</th><th style='color:gray'>Eliminar Producto</th></tr>";
-            cart[0].products.forEach((prod) => {
+            cart.products.forEach((prod) => {
                 showProductsCart(prod);
             });
             addExtrasCart();
@@ -125,12 +135,12 @@ cartButton.addEventListener('click', async () => {
 });
 
 async function buyCart(cart_id, user_id) {
-    console.log('cart Id: ', cart_id);
-    console.log('user Id: ', user_id);
-    const cartLog = await fetch("http://localhost:8080/carrito/carritos");
+    const userLog = await fetch("http://localhost:8080/users/me");
+    const user = await userLog.json();
+    const cartLog = await fetch(`http://localhost:8080/carrito/${user.email}`);
     const cart = await cartLog.json();
     let message = '';
-    await cart[0].products.forEach((prod) => {
+    await cart.products.forEach((prod) => {
         message += `<p>Producto: ${prod.title} | Cantidad: ${prod.quantity}</p>`;
     });
     const messageObject = { message };
@@ -147,7 +157,7 @@ async function buyCart(cart_id, user_id) {
     if (responseFetch.status === 200) {
         const buyedOrder = {
             timestamp: new Date(),
-            products: cart[0].products
+            products: cart.products
         }
         const orderJSON = JSON.stringify(buyedOrder);
         await fetch(`http://localhost:8080/carrito/order/new/${cart_id}`, {

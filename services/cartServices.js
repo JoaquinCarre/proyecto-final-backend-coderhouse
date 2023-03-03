@@ -10,8 +10,8 @@ async function createANewCart(data) {
     return await repository.createNew(data);
 }
 
-async function getCartByid(id) {
-    return await repository.getACartByid(id);
+async function getCartByEmail(email) {
+    return await repository.getACartByEmail(email);
 }
 
 async function uploadCartById(idCart, prod) {
@@ -33,7 +33,7 @@ async function deleteItemById(id, product_id) {
 export default {
     getCarts,
     createANewCart,
-    getCartByid,
+    getCartByEmail,
     uploadCartById,
     uploadCartQuantity,
     deleteCartById,

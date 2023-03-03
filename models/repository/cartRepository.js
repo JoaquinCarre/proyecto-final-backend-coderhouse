@@ -21,8 +21,8 @@ export default class CartRepository {
         return new CartDTO(response);
     }
 
-    async getACartByid(id) {
-        const data = await this.dao.getOneById(id);
+    async getACartByEmail(email) {
+        const data = await this.dao.getOneByEmail(email);
         if (data) {
             return new CartDTO(data);
         } else {

@@ -6,9 +6,7 @@ import { getUser } from '../services/userServices.js';
 
 export async function indexCart(_, res, next) {
   try {
-    const cart = await cartServices.getCarts();
-    const productos = cart[0].products;
-    res.status(200).render('cart.handlebars', { productos });
+    res.status(200).render('cart.handlebars');
   } catch (err) {
     logger.error(err.message);
     const customError = new Error(err.message);
@@ -29,11 +27,13 @@ export async function getAllCarts(_, res, next) {
   }
 }
 
-export async function createCart(_, res, next) {
+export async function createCart(req, res, next) {
   try {
-    const isCart = await cartServices.getCarts();
-    if (!isCart.length) {
+    const userEmail = req.body;
+    const isCart = await cartServices.getCartByEmail(userEmail);
+    if (!isCart) {
       const newCart = await cartServices.createANewCart({
+        email: userEmail.email,
         timestamp: Date.now(),
         products: []
       });
@@ -52,8 +52,8 @@ export async function createCart(_, res, next) {
 
 export async function getCart(req, res, next) {
   try {
-    const { params: { id } } = req;
-    const cart = await cartServices.getCartByid(id);
+    const { params: { email } } = req;
+    const cart = await cartServices.getCartByEmail(email);
     res.json(cart);
   } catch (err) {
     logger.error(err.message);

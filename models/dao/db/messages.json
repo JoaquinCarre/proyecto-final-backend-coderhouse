@@ -34,6 +34,17 @@
           "content": "Es que me super interesa!",
           "timestamp": "28/2/2023, 22:00:15"
         }
+      },
+      {
+        "authors": {
+          "email": "joa.carre21@gmail.com",
+          "name": "Joaquín Manuel Carré"
+        },
+        "comments": {
+          "id": "b57d20bb-2d72-4afc-9ab3-ca9bf12dcb72",
+          "content": "Buenas! Yo quisiera saber si van a sacar alguna novedad pronto. Gracias!",
+          "timestamp": "2/3/2023, 22:18:12"
+        }
       }
     ]
   }
