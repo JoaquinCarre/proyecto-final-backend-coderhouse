@@ -49,3 +49,6 @@
 {"level":"error","message":"request to http://localhost:8080/users/me failed, reason: connect ECONNREFUSED ::1:8080"}
 {"level":"error","message":"request to http://localhost:8080/users/me failed, reason: connect ECONNREFUSED ::1:8080"}
 {"level":"error","message":"Error al obtener el email del usuario"}
+{"level":"error","message":"Error en servidor Error: listen EADDRINUSE: address already in use 0.0.0.0:8080"}
+{"level":"error","message":"Error en servidor Error: listen EADDRINUSE: address already in use 0.0.0.0:8080"}
+{"level":"error","message":"Error en servidor Error: listen EADDRINUSE: address already in use 0.0.0.0:8080"}
