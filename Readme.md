@@ -15,7 +15,7 @@ npm i
 Antes de ejecutar la aplicación asegurarse de crear un archivo '.env' con los siguientes datos:
 ```
 ENV='local'
-MONGO_PASS=GxX3qu1J5iQISADf
+MONGO_URI=mongodb+srv://joacarre21:GxX3qu1J5iQISADf@cluster0.del2hb6.mongodb.net/eccomerce?retryWrites=true&w=majority
 NODEMAILER_PASS=iltmkxqktfldqbiv
 MAIL_NODEMAILER='joa_carre21@hotmail.com'
 ```
