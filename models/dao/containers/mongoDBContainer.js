@@ -1,13 +1,12 @@
 import { logger } from "../../../logs/logger.js";
 import mongoose from 'mongoose';
-import config from '../../../config/mongoDB.js';
 
 const advancedOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }
 
-mongoose.connect(config.mongoDB.URI, advancedOptions);
+mongoose.connect(process.env.MONGO_URI, advancedOptions);
 
 class MongoDBContainer {
   constructor(collection) {
