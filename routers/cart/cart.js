@@ -1,11 +1,10 @@
 import { Router } from 'express';
-import { indexCart, getAllCarts, createCart, getCart, addProductToCart, addSameProduct, deleteCart, deleteProductFromCart, buyCart, newOrder } from '../../controllers/cartController.js';
+import { indexCart, createCart, getCart, addProductToCart, addSameProduct, deleteCart, deleteProductFromCart, buyCart, newOrder } from '../../controllers/cartController.js';
 import { verifyToken } from '../../config/jwt.js';
 
 const router = Router();
 
 router.get('/', verifyToken, indexCart)
-router.get('/carritos', verifyToken, getAllCarts)
 router.post('/', verifyToken, createCart)
 router.get('/:email', verifyToken, getCart)
 router.post('/:id', verifyToken, addProductToCart)
