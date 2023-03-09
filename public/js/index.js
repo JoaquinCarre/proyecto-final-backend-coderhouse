@@ -81,7 +81,7 @@ signinForm.addEventListener('submit', async (event) => {
         body: dataJSON
     });
     if (responseFetch.status === 200) {
-        window.location.replace("/productos");
+        window.location.replace("/api/productos");
     }
     else {
         signinDiv.classList.add('d-none');

@@ -7,7 +7,7 @@ router.get('/', async (req, res, next) => {
     try {
         const cookies = req.cookies.token
         if (cookies) {
-            res.redirect('/productos');
+            res.redirect('/api/productos');
         } else {
             res.render('index.handlebars');
         }
