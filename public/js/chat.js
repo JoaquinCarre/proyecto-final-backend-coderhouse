@@ -39,7 +39,7 @@ signOutButton.addEventListener('click', async () => {
 
 //Boton para linkear a la vista de productos
 linkProducts.addEventListener('click', async () => {
-    window.location.replace("/productos");
+    window.location.replace("/api/productos");
 });
 
 //Boton para linkear a la vista de chat

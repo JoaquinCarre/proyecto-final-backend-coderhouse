@@ -52,7 +52,7 @@ export async function getImageProduct(req, res, next) {
     const product = await productServices.getProductById(id);
     const ruta = product.thumbnail;
     const nombreArchivo = ruta.replace("./img/", "");
-    res.send(`<img src="../../img/${nombreArchivo}" alt="imagen${product.title}">`)
+    res.send(`<img src="../../../img/${nombreArchivo}" alt="imagen${product.title}">`)
   } catch (err) {
     logger.error(err.message);
     const customError = new Error(err.message);

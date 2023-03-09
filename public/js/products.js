@@ -12,7 +12,7 @@ const loading = document.getElementById('loading-icon');
 async function loadWebPage() {
     const userLog = await fetch("http://localhost:8080/users/me");
     const user = await userLog.json();
-    const cartLog = await fetch(`http://localhost:8080/carrito/${user.email}`);
+    const cartLog = await fetch(`http://localhost:8080/api/carrito/${user.email}`);
     const cart = await cartLog.json();
     loading.classList.remove('d-none');
     setTimeout(async () => {
@@ -46,7 +46,7 @@ signOutButton.addEventListener('click', async () => {
 
 //Boton para linkear a la vista de productos
 linkProducts.addEventListener('click', async () => {
-    window.location.replace("/productos");
+    window.location.replace("/api/productos");
 });
 
 //Boton para linkear a la vista de chat
@@ -62,15 +62,15 @@ const tableProducts = document.getElementById("tableProducts");
 async function addProductToCart(id) {
     const userLog = await fetch("http://localhost:8080/users/me");
     const user = await userLog.json();
-    const cartLog = await fetch(`http://localhost:8080/carrito/${user.email}`);
+    const cartLog = await fetch(`http://localhost:8080/api/carrito/${user.email}`);
     const cart = await cartLog.json();
-    const productToAddLog = await fetch(`http://localhost:8080/productos/${id}`);
+    const productToAddLog = await fetch(`http://localhost:8080/api/productos/${id}`);
     let productToAdd = await productToAddLog.json();
     if (!cart) {
         productToAdd = { ...productToAdd, quantity: 1 };
         const emailUser = { email: user.email };
         const emailUserJSON = JSON.stringify(emailUser);
-        let responseFetch = await fetch("http://localhost:8080/carrito", {
+        let responseFetch = await fetch("http://localhost:8080/api/carrito", {
             headers: {
                 'Content-Type': 'application/json',
                 'Content-Length': emailUserJSON.length
@@ -81,7 +81,7 @@ async function addProductToCart(id) {
         const newCart = await responseFetch.json();
         alert(`Se crea nuevo carrito con el Id: ${newCart}`);
         const dataJSON = JSON.stringify(productToAdd);
-        let addProductFetch = await fetch(`http://localhost:8080/carrito/${newCart}`, {
+        let addProductFetch = await fetch(`http://localhost:8080/api/carrito/${newCart}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Content-Length': dataJSON.length
@@ -98,7 +98,7 @@ async function addProductToCart(id) {
             cart.products[productIndex].quantity += 1;
             productToAdd = cart.products[productIndex];
             const dataJSON = JSON.stringify(productToAdd);
-            await fetch(`http://localhost:8080/carrito/${cart._id}`, {
+            await fetch(`http://localhost:8080/api/carrito/${cart._id}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Content-Length': dataJSON.length
@@ -109,7 +109,7 @@ async function addProductToCart(id) {
         } else {
             productToAdd.quantity = 1;
             const dataJSON = JSON.stringify(productToAdd);
-            await fetch(`http://localhost:8080/carrito/${cart._id}`, {
+            await fetch(`http://localhost:8080/api/carrito/${cart._id}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Content-Length': dataJSON.length
@@ -123,5 +123,5 @@ async function addProductToCart(id) {
 }
 
 cartButton.addEventListener('click', async () => {
-    window.location.replace("/carrito");
+    window.location.replace("/api/carrito");
 });
