@@ -1,18 +1,6 @@
 import { logger } from '../logs/logger.js';
 import productServices from '../services/productServices.js';
 
-export async function indexProducts(_, res, next) {
-  try {
-    const productos = await productServices.getAll();
-    res.status(200).render('products.handlebars', { productos });
-  } catch (err) {
-    logger.error(err.message);
-    const customError = new Error(err.message);
-    customError.id = 3;
-    next(customError);
-  }
-}
-
 export async function getAllProducts(_, res, next) {
   try {
     const productos = await productServices.getAll();

@@ -4,16 +4,6 @@ import cartServices from '../services/cartServices.js';
 import orderServices from '../services/orderServices.js';
 import { getUser } from '../services/userServices.js';
 
-export async function indexCart(_, res, next) {
-  try {
-    res.status(200).render('cart.handlebars');
-  } catch (err) {
-    logger.error(err.message);
-    const customError = new Error('Ups! Algo ha salido mal');
-    next(customError);
-  }
-}
-
 export async function getAllCarts(_, res, next) {
   try {
     const cart = await cartServices.getCarts();
