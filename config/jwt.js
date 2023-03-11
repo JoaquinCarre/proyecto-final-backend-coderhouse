@@ -1,20 +1,17 @@
 import jwt from "jsonwebtoken";
 
-export function verifyToken(req, res, next) {
-    const token = req.cookies.token;
+export function verifyToken(req, _, next) {
+    const token = req.headers.authorization?.split(' ')[1];
     if (!token) {
-        const customError = new Error('Falta el token de autenticación');
-        customError.id = 2;
+        const customError = new Error('No se tiene acceso sin loguearse');
         next(customError);
     }
-
-    try {
-        const decodedToken = jwt.verify(token, 'my-secret-key');
-        req.user = decodedToken;
+    jwt.verify(token, 'my-secret-key', (err, decoded) => {
+        if (err) {
+            const customError = new Error('No se tiene acceso sin loguearse');
+            next(customError);
+        }
+        req.user = decoded;
         next();
-    } catch (error) {
-        const customError = new Error('Token de autenticación inválido');
-        customError.id = 2;
-        next(customError);
-    }
-};
+    });
+}

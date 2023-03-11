@@ -1,4 +1,4 @@
-<section class="container">
+<section class="container" id="index-section">
   <div id="signin-div" class="border border-dark mt-5 bg-primary rounded d-none">
     <form id="signin-form" class="m-3 text-white fw-bold">
       <div class="mb-3">
@@ -45,4 +45,55 @@
     </form>
   </div>
 </section>
+<section class="container d-none" id="products-section">
+    <div class="row bg-danger">
+        <div class="text-white fw-bold col-6 justify-content-end">Categorías: </div><a class="text-white col-2 text-decoration-none" href="/api/productos/category/familiar">Familiar</a><a class="text-white col-2 text-decoration-none" href="/api/productos/category/estrategia">Estrategia</a><a class="text-white col-2 text-decoration-none" href="/api/productos/category/roll&write">Roll & Write</a>
+    </div>
+    <div class="products-table">
+        <div>
+            <h2>Productos</h2>
+            <table class="table bg-white text-center" id="tableProducts">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Precio [$]</th>
+                    <th>Imagen</th>
+                    <th>Agregar al carrito</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</section>
+<section class="container d-none" id="chat-section">
+    <div class="mt-3 bg-light p-3 border border-dark">
+        <h2>Centro de Mensajes</h2>
+        <div class="border border-primary m-3">
+            <ul id="messages" class="list-group"></ul>
+        </div>
+        <form id="form" action="" class="input-group">
+                <input class="form-control" id="msg_input" autocomplete="off" aria-describedby="button-addon1"
+                    placeholder="mensaje" />
+                <button class="btn btn-light btn-outline-dark" type="submit" id="button-addon1">Enviar</button>
+        </form>
+    </div>
+</section>
+<section class="container d-none" id="cart-section">
+    <div id="cart-div">
+        <h1 class="text-white">Carrito de Compras</h1>
+        <div id="table-container" class="bg-warning">
+            <table id="table-cart-products" class="m-auto table table-borderless" border="2" align="center">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Precio [$]</th>
+                    <th>Imagen</th>
+                    <th>Cantidad</th>
+                    <th style='color:gray'>Eliminar Producto</th>
+                </tr>
+            </table>
+        </div>
+        <div id="buttons-cart">
+        </div>
+        <div id="message-cart"></div>
+    </div>
+</section>
+<script src="/socket.io/socket.io.js"></script>
 <script src="./js/index.js"></script>

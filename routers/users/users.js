@@ -1,5 +1,4 @@
 import { Router } from "express";
-/* import { verifyAuth } from "../../controllers/authController.js"; */
 import { verifyToken } from '../../config/jwt.js'
 import {
   getAuthUser,

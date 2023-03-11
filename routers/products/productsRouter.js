@@ -7,16 +7,14 @@ import {
     addNewProduct,
     getProduct,
     updateProduct,
-    deleteProduct,
-    indexProducts
+    deleteProduct
 } from '../../controllers/productController.js';
 
 const router = Router();
 
-router.get('/', verifyToken, indexProducts);
-router.get('/all', verifyToken, getAllProducts);
-router.get('/category/:category', verifyToken, getByCategory);
-router.get('/images/:id', verifyToken, getImageProduct);
+router.get('/', verifyToken, getAllProducts);
+router.get('/category/:category', getByCategory);
+router.get('/images/:id', getImageProduct);
 router.post('/', verifyToken, addNewProduct);
 router.get('/:id', verifyToken, getProduct);
 router.put('/:id', verifyToken, updateProduct);

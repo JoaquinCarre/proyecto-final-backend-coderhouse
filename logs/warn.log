@@ -362,3 +362,32 @@
 {"level":"warn","message":"Acceso a ruta inexistente /api/img/cajaEdificiosLocos.png con el método GET"}
 {"level":"warn","message":"Acceso a ruta inexistente /favicon.ico con el método GET"}
 {"level":"warn","message":"Acceso a ruta inexistente /favicon.ico con el método GET"}
+{"level":"warn","message":"Acceso a ruta inexistente /productos con el método GET"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'id')"}
+{"level":"warn","message":"Acceso a ruta inexistente /carrito con el método GET"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'id')"}
+{"level":"warn","message":"Acceso a ruta inexistente /api/carritos con el método GET"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'id')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'id')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'id')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'id')"}
+{"level":"error","message":"No ha sido posible desloguearse de la cuenta: req is not defined"}
+{"level":"error","message":"No ha sido posible desloguearse de la cuenta: req is not defined"}
+{"level":"error","message":"No ha sido posible desloguearse de la cuenta: req.logout is not a function"}
+{"level":"error","message":"No ha sido posible desloguearse de la cuenta: req.logout is not a function"}
+{"level":"error","message":"No ha sido posible desloguearse de la cuenta: req.logout is not a function"}
+{"level":"warn","message":"Acceso a ruta inexistente /favicon.ico con el método GET"}
+{"level":"warn","message":"Acceso a ruta inexistente /favicon.ico con el método GET"}
+{"level":"warn","message":"Acceso a ruta inexistente /api/info con el método GET"}
+{"level":"warn","message":"Acceso a ruta inexistente /info con el método GET"}
+{"level":"warn","message":"Acceso a ruta inexistente /favicon.ico con el método GET"}
+{"level":"warn","message":"Acceso a ruta inexistente /favicon.ico con el método GET"}
+{"level":"warn","message":"Acceso a ruta inexistente /favicon.ico con el método GET"}
+{"level":"warn","message":"Acceso a ruta inexistente /favicon.ico con el método GET"}
+{"level":"warn","message":"Fallo en el registro: el usuario con el username joa@hotmail.com ya existe"}
+{"level":"warn","message":"Acceso a ruta inexistente /productos/images/63cb310b9c071e35cdebe9e6 con el método GET"}
+{"level":"warn","message":"Acceso a ruta inexistente /productos/images/63cb367483b76261bad97015 con el método GET"}
+{"level":"warn","message":"Acceso a ruta inexistente /productos/images/63cb368583b76261bad97016 con el método GET"}
+{"level":"warn","message":"Acceso a ruta inexistente /favicon.ico con el método GET"}
+{"level":"warn","message":"Acceso a ruta inexistente /favicon.ico con el método GET"}
+{"level":"warn","message":"Acceso a ruta inexistente /favicon.ico con el método GET"}

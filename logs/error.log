@@ -54,3 +54,14 @@
 {"level":"error","message":"Error en servidor Error: listen EADDRINUSE: address already in use 0.0.0.0:8080"}
 {"kind":"ObjectId","level":"error","message":"No es posible obtener el elemento buscado de la base de datos  Cast to ObjectId failed for value \"public\" (type string) at path \"_id\" for model \"Product\"","path":"_id","reason":{},"stack":"CastError: Cast to ObjectId failed for value \"public\" (type string) at path \"_id\" for model \"Product\"\n    at model.Query.exec (D:\\Facultad\\carreraDesarrolladorWebFullStack\\4 - BackEnd\\Ejercicios\\25 - Proyecto Final modificado\\node_modules\\mongoose\\lib\\query.js:4927:21)\n    at Query.then (D:\\Facultad\\carreraDesarrolladorWebFullStack\\4 - BackEnd\\Ejercicios\\25 - Proyecto Final modificado\\node_modules\\mongoose\\lib\\query.js:5026:15)","stringValue":"\"public\"","value":"public","valueType":"string"}
 {"level":"error","message":"next is not defined"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'id')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'id')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'id')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'id')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'id')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'id')"}
+{"level":"error","message":"No ha sido posible desloguearse de la cuenta: req is not defined"}
+{"level":"error","message":"No ha sido posible desloguearse de la cuenta: req is not defined"}
+{"level":"error","message":"No ha sido posible desloguearse de la cuenta: req.logout is not a function"}
+{"level":"error","message":"No ha sido posible desloguearse de la cuenta: req.logout is not a function"}
+{"level":"error","message":"No ha sido posible desloguearse de la cuenta: req.logout is not a function"}

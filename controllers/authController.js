@@ -2,29 +2,13 @@ import { logger } from "../logs/logger.js";
 import { sendMail } from '../utils/emailUtils.js';
 import jwt from 'jsonwebtoken';
 
-export async function getCookie(req, res, next) {
-  try {
-    const cookies = req.cookies.token
-    if (cookies) {
-      res.status(200).json({ cookies });
-    } else {
-      res.status(401).json('no existe cookie');
-    }
-  } catch (err) {
-    logger.error(`${err.message}`);
-    const customError = new Error(err.message);
-    customError.id = 3;
-    next(customError);
-  }
-}
-
 export async function signIn(req, res, next) {
   try {
     const { user } = req
     req.login(user, { session: false }, async (err) => {
-      if (err) return next(err)
+      if (err) return next(err);
       const token = jwt.sign({ email: user.email, id: user._id }, 'my-secret-key', { expiresIn: '10m' });
-      return res.cookie('token', token, { maxAge: 600000, httpOnly: true }).json({ message: `Bienvenido ${user.email}.`, token })
+      return res.status(200).json({ token });
     })
   }
   catch (err) {
@@ -37,7 +21,6 @@ export async function signIn(req, res, next) {
 
 export async function signOut(_, res, next) {
   try {
-    res.clearCookie('token');
     res.status(200).json({ message: `Hasta luego!.` });
   } catch (err) {
     logger.error(`No ha sido posible desloguearse de la cuenta: ${err.message}`);
