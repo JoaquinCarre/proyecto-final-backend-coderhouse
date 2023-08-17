@@ -47,7 +47,7 @@ const inputMessage = document.getElementById("msg_input");
 //Carga de la página
 async function loadWebPage() {
     token = localStorage.getItem('token');
-    const userLog = await fetch("http://localhost:8080/users/me", {
+    const userLog = await fetch("https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/users/me", {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Beared ${token}`
@@ -59,7 +59,7 @@ async function loadWebPage() {
 
     if (userLog.status === 200) {
         const user = await userLog.json();
-        const cartLog = await fetch(`http://localhost:8080/api/carrito/${user.email}`, {
+        const cartLog = await fetch(`https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/api/carrito/${user.email}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Beared ${token}`
@@ -67,7 +67,7 @@ async function loadWebPage() {
             method: 'GET',
         });
         const cart = await cartLog.json();
-        const productLog = await fetch(`http://localhost:8080/api/productos`, {
+        const productLog = await fetch(`https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/api/productos`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Beared ${token}`
@@ -139,7 +139,7 @@ signinForm.addEventListener('submit', async (event) => {
         password: passwordSignin.value
     };
     const dataJSON = JSON.stringify(data);
-    let responseFetch = await fetch("http://localhost:8080/auth/sign-in", {
+    let responseFetch = await fetch("https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/auth/sign-in", {
         headers: {
             'Content-Type': 'application/json',
             'Content-Length': dataJSON.length
@@ -151,7 +151,7 @@ signinForm.addEventListener('submit', async (event) => {
         const data = await responseFetch.json();
         const token = data.token;
         localStorage.setItem('token', token);
-        const userLog = await fetch("http://localhost:8080/users/me", {
+        const userLog = await fetch("https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/users/me", {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Beared ${token}`
@@ -159,7 +159,7 @@ signinForm.addEventListener('submit', async (event) => {
             method: 'GET',
         });
         const user = await userLog.json();
-        const cartLog = await fetch(`http://localhost:8080/api/carrito/${user.email}`, {
+        const cartLog = await fetch(`https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/api/carrito/${user.email}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Beared ${token}`
@@ -167,7 +167,7 @@ signinForm.addEventListener('submit', async (event) => {
             method: 'GET',
         });
         const cart = await cartLog.json();
-        const productLog = await fetch(`http://localhost:8080/api/productos`, {
+        const productLog = await fetch(`https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/api/productos`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Beared ${token}`
@@ -213,7 +213,7 @@ signupForm.addEventListener('submit', async (event) => {
             phone: phoneSignup.value,
         };
         const dataJSON = JSON.stringify(data);
-        let responseFetch = await fetch("http://localhost:8080/auth/sign-up", {
+        let responseFetch = await fetch("https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/auth/sign-up", {
             headers: {
                 'Content-Type': 'application/json',
                 'Content-Length': dataJSON.length
@@ -252,7 +252,7 @@ signupForm.addEventListener('submit', async (event) => {
 
 //Botón para Desconectarse de la sesión
 signOutButton.addEventListener('click', async () => {
-    const responseFetch = await fetch("http://localhost:8080/auth/sign-out", {
+    const responseFetch = await fetch("https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/auth/sign-out", {
         headers: {
             'Content-Type': 'application/json'
         },
@@ -277,7 +277,7 @@ signOutButton.addEventListener('click', async () => {
 //Boton para linkear a la vista de productos
 linkProducts.addEventListener('click', async () => {
     token = localStorage.getItem('token');
-    const productLog = await fetch(`http://localhost:8080/api/productos`, {
+    const productLog = await fetch(`https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/api/productos`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Beared ${token}`
@@ -327,7 +327,7 @@ function showProducts(data) {
 //crear carrito o añadir un producto al carrito si ya está creado
 async function addProductToCart(id) {
     token = localStorage.getItem('token');
-    const userLog = await fetch("http://localhost:8080/users/me", {
+    const userLog = await fetch("https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/users/me", {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Beared ${token}`
@@ -335,7 +335,7 @@ async function addProductToCart(id) {
         method: 'GET',
     });
     const user = await userLog.json();
-    const cartLog = await fetch(`http://localhost:8080/api/carrito/${user.email}`, {
+    const cartLog = await fetch(`https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/api/carrito/${user.email}`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Beared ${token}`
@@ -343,7 +343,7 @@ async function addProductToCart(id) {
         method: 'GET',
     });
     const cart = await cartLog.json();
-    const productToAddLog = await fetch(`http://localhost:8080/api/productos/${id}`, {
+    const productToAddLog = await fetch(`https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/api/productos/${id}`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Beared ${token}`
@@ -355,7 +355,7 @@ async function addProductToCart(id) {
         productToAdd = { ...productToAdd, quantity: 1 };
         const emailUser = { email: user.email };
         const emailUserJSON = JSON.stringify(emailUser);
-        let responseFetch = await fetch("http://localhost:8080/api/carrito", {
+        let responseFetch = await fetch("https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/api/carrito", {
             headers: {
                 'Content-Type': 'application/json',
                 'Content-Length': emailUserJSON.length,
@@ -367,7 +367,7 @@ async function addProductToCart(id) {
         const newCart = await responseFetch.json();
         alert(`Se crea nuevo carrito con el Id: ${newCart}`);
         const dataJSON = JSON.stringify(productToAdd);
-        let addProductFetch = await fetch(`http://localhost:8080/api/carrito/${newCart}`, {
+        let addProductFetch = await fetch(`https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/api/carrito/${newCart}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Content-Length': dataJSON.length,
@@ -385,7 +385,7 @@ async function addProductToCart(id) {
             cart.products[productIndex].quantity += 1;
             productToAdd = cart.products[productIndex];
             const dataJSON = JSON.stringify(productToAdd);
-            await fetch(`http://localhost:8080/api/carrito/${cart._id}`, {
+            await fetch(`https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/api/carrito/${cart._id}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Content-Length': dataJSON.length,
@@ -397,7 +397,7 @@ async function addProductToCart(id) {
         } else {
             productToAdd.quantity = 1;
             const dataJSON = JSON.stringify(productToAdd);
-            await fetch(`http://localhost:8080/api/carrito/${cart._id}`, {
+            await fetch(`https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/api/carrito/${cart._id}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Content-Length': dataJSON.length,
@@ -416,7 +416,7 @@ async function addProductToCart(id) {
 //botón para dirigir al carrito
 cartButton.addEventListener('click', async () => {
     token = localStorage.getItem('token');
-    const userLog = await fetch("http://localhost:8080/users/me", {
+    const userLog = await fetch("https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/users/me", {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Beared ${token}`
@@ -424,7 +424,7 @@ cartButton.addEventListener('click', async () => {
         method: 'GET',
     });
     const user = await userLog.json();
-    const cartLog = await fetch(`http://localhost:8080/api/carrito/${user.email}`, {
+    const cartLog = await fetch(`https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/api/carrito/${user.email}`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Beared ${token}`
@@ -451,7 +451,7 @@ async function resetCart() {
 //imprimir total y botones en carrito
 async function addExtrasCart() {
     token = localStorage.getItem('token');
-    const userLog = await fetch("http://localhost:8080/users/me", {
+    const userLog = await fetch("https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/users/me", {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Beared ${token}`
@@ -459,7 +459,7 @@ async function addExtrasCart() {
         method: 'GET',
     });
     const user = await userLog.json();
-    const cartLog = await fetch(`http://localhost:8080/api/carrito/${user.email}`, {
+    const cartLog = await fetch(`https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/api/carrito/${user.email}`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Beared ${token}`
@@ -494,7 +494,7 @@ function showProductsCart(data) {
 
 async function deleteProductCart(product_id) {
     token = localStorage.getItem('token');
-    const userLog = await fetch("http://localhost:8080/users/me", {
+    const userLog = await fetch("https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/users/me", {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Beared ${token}`
@@ -502,7 +502,7 @@ async function deleteProductCart(product_id) {
         method: 'GET',
     });
     const user = await userLog.json();
-    const cartLog = await fetch(`http://localhost:8080/api/carrito/${user.email}`, {
+    const cartLog = await fetch(`https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/api/carrito/${user.email}`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Beared ${token}`
@@ -510,7 +510,7 @@ async function deleteProductCart(product_id) {
         method: 'GET',
     });
     const cart = await cartLog.json();
-    let responseFetch = await fetch(`http://localhost:8080/api/carrito/${cart._id}/${product_id}`, {
+    let responseFetch = await fetch(`https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/api/carrito/${cart._id}/${product_id}`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Beared ${token}`
@@ -518,7 +518,7 @@ async function deleteProductCart(product_id) {
         method: 'DELETE'
     });
     if (responseFetch.status === 200) {
-        const cartLog = await fetch(`http://localhost:8080/api/carrito/${user.email}`, {
+        const cartLog = await fetch(`https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/api/carrito/${user.email}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Beared ${token}`
@@ -528,7 +528,7 @@ async function deleteProductCart(product_id) {
         const cart = await cartLog.json();
         if (!cart.products.length) {
             deleteCart(cart._id);
-            const productLog = await fetch(`http://localhost:8080/api/productos`, {
+            const productLog = await fetch(`https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/api/productos`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Beared ${token}`
@@ -557,7 +557,7 @@ async function deleteProductCart(product_id) {
 
 async function deleteCart(cart_id) {
     token = localStorage.getItem('token');
-    let responseFetch = await fetch(`http://localhost:8080/api/carrito/${cart_id}`, {
+    let responseFetch = await fetch(`https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/api/carrito/${cart_id}`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Beared ${token}`
@@ -565,7 +565,7 @@ async function deleteCart(cart_id) {
         method: 'DELETE'
     });
     if (responseFetch.status === 200) {
-        const productLog = await fetch(`http://localhost:8080/api/productos`, {
+        const productLog = await fetch(`https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/api/productos`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Beared ${token}`
@@ -587,7 +587,7 @@ async function deleteCart(cart_id) {
 
 async function buyCart(cart_id, user_id) {
     token = localStorage.getItem('token');
-    const userLog = await fetch("http://localhost:8080/users/me", {
+    const userLog = await fetch("https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/users/me", {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Beared ${token}`
@@ -595,7 +595,7 @@ async function buyCart(cart_id, user_id) {
         method: 'GET',
     });
     const user = await userLog.json();
-    const cartLog = await fetch(`http://localhost:8080/api/carrito/${user.email}`, {
+    const cartLog = await fetch(`https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/api/carrito/${user.email}`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Beared ${token}`
@@ -610,7 +610,7 @@ async function buyCart(cart_id, user_id) {
     const messageObject = { message };
     const dataJSON = JSON.stringify(messageObject);
     messageCart.innerText = 'Procesando compra...';
-    let responseFetch = await fetch(`http://localhost:8080/api/carrito/${cart_id}/${user_id}`, {
+    let responseFetch = await fetch(`https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/api/carrito/${cart_id}/${user_id}`, {
         headers: {
             'Content-Type': 'application/json',
             'Content-Length': dataJSON.length,
@@ -625,7 +625,7 @@ async function buyCart(cart_id, user_id) {
             products: cart.products
         }
         const orderJSON = JSON.stringify(buyedOrder);
-        await fetch(`http://localhost:8080/api/carrito/order/new/${cart_id}`, {
+        await fetch(`https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/api/carrito/order/new/${cart_id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Content-Length': dataJSON.length,
@@ -657,7 +657,7 @@ function showMessage(data) {
 formChat.addEventListener("submit", async function (e) {
     e.preventDefault()
     token = localStorage.getItem('token');
-    const userLog = await fetch("http://localhost:8080/users/me", {
+    const userLog = await fetch("https://proyecto-final-backend-coderhouse-1786-dev.fl0.io/users/me", {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Beared ${token}`
