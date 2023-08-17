@@ -8,7 +8,7 @@ git clone "https://github.com/JoaquinCarre/proyecto-final-backend-coderhouse"
 
 Luego asegurarse de instalar todas las dependencias con el siguiente comando:
 ```
-npm i
+npm i 
 ```
 
 ## Ejecución
